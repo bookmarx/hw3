@@ -1,0 +1,23 @@
+{
+  "name": "hw2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bookmarx/hw2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bookmarx/hw2/issues"
+  },
+  "homepage": "https://github.com/bookmarx/hw2#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.2"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "hw2",
+  "homepage": "https://github.com/bookmarx/hw2",
+  "authors": [
+    "Alex Gian <alexhgian@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.6.1"
+  }
+}
