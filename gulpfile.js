@@ -3,19 +3,19 @@ var gulp = require('gulp'),
 
 gulp.task('connect', function() {
   connect.server({
-    root: 'app',
+    root: 'client',
     livereload: true
   });
 });
 
 gulp.task('html', function () {
-  gulp.src('./app/*.html')
+  gulp.src('./client/*.html')
     .pipe(connect.reload());
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./app/*.html'], ['html']);
-   gulp.watch(['./app/*.css'], ['css']);
+  gulp.watch(['./client/*.html'], ['html']);
+   gulp.watch(['./client/*.css'], ['css']);
 });
 
 gulp.task('default', ['connect', 'watch']);

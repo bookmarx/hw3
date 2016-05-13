@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Bookmarx</title>
+    <link href="bower_components/skeleton/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/skeleton/css/skeleton.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+    <link href="style/modal.css" rel="stylesheet" type="text/css">
+</head>
+<body style="margin-left: 0px">
+    <div class="bm-container">
+        <nav class="bm-nav dark-primary-color">
+            <form>
+                <div class="bm-nav-top row">
+                    <h4 class="bm-title">Bookmarx</h4>
+                    <div class="right">
+                        <a href="#openAddModal" class="button fa fa-plus fa-2x" aria-hidden="true" title="Hide/Show"></a>
+                        <a href="#openAddFolderModal" class="button fa fa-folder fa-2x" aria-hidden="true" title="Hide/Show"></a>
+                        <a href="#" class="button fa fa-bars fa-2x" aria-hidden="true" title="Hide/Show"></a>
+                    </div>
+                </div>
+                <div class="bm-nav-bottom row">
+                    <input id="bm-search" type="text" placeholder="Search bookmarks">
+                    <select id="bm-sort">
+                        <option value="Option 3">Most Recent</option>
+                        <option value="Option 1">Favorites</option>
+                        <option value="Option 2">Alphabetical</option>
+                        <option value="Option 4">Date</option>
+                    </select>
+                </div>
+            </form>
+        </nav>
+        <div class="bm-content">
+             <% include partials/list %>
+        </div>
+        <footer class="bm-footer dark-primary-color">
+            <form action="" method="get">
+                <button type="submit" class="button-primary"><i class="fa fa-upload"></i> Import</button>
+                <button type="submit" class="button-primary" action="/example.csv"><i class="fa fa-download"></i> Export</button>
+            </form>
+        </footer>
+    </div>
+    <div class="bm-view">
+        <iframe src="http://www.apple.com/"></iframe>
+    </div>
+     <% include partials/addModal %>
+     <% include partials/editModal %>
+     <% include partials/addFolderModal %>
+</body>
+</html>
