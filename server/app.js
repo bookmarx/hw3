@@ -4,7 +4,7 @@ var config = require('./config');
 // var users = require('./users');
 
 // db.init();
-var bm = require('./bookmark');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -28,7 +28,7 @@ app.use(express.static('client'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Routes - consider putting in routes.js */
-app.use('/v1/bookmark', require('./api_v1/bookmark'));
+app.use('/', require('./api_v1/bookmark'));
 app.use('/v1/user', require('./api_v1/user'));
 
 app.listen(config.PORT, function () {
