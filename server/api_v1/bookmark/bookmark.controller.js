@@ -7,17 +7,11 @@ var controller = {};
 * Selects all books and then renders the page with the list.ejs template
 */
 controller.list = function(req, res) {
-    // db.query('SELECT * from books ORDER BY id', function(err, bm) {
-    //   if (err) throw err;
-    //
-    //   res.render('index', { bm: bm });
-    // });
-    res.render('index', {
-        bm: [
-            {name:'Google', url:"http://www.google.com"},
-            {name:'Apple', url:"http://www.google.com"},
-            {name:'Amazon', url:"http://www.google.com"}
-        ]
+    db.query('SELECT * from bookmarks ORDER BY id', function(err, bm) {
+        var renderBM = [];
+        if (err) throw err;
+
+        res.render('index', { bm: bm });
     });
 };
 

@@ -1,11 +1,10 @@
 var mysql      = require('mysql');
-var config = require('./config');
 
 var MySQL = function() {
     var connection;
 
     return {
-        init: function(){
+        init: function(config){
             MySQL.connection = mysql.createConnection({
                 host     : config.DATABASE_HOST,
                 user     : config.DATABASE_USER,
@@ -13,7 +12,9 @@ var MySQL = function() {
                 database : config.DATABASE_NAME
             });
 
-            MySQL.connection.connect();
+            MySQL.connection.connect(function(err){
+                console.log('Connecting to MYSQL!')
+            });
         },
         query: function(querystring, callback){
             MySQL.connection.query(querystring, callback);

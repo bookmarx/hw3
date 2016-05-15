@@ -1,36 +1,27 @@
-var config = require('./config');
-// var db = require('./db');
-// var books = require('./books');
-// var users = require('./users');
-
-// db.init();
-
 var express = require('express');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var mySession = session({
-  secret: 'N0deJS1sAw3some',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false }
-});
+var http = require('http');
+
+var mysql = require('./db');
+var config = require('./config/environment');
+
+mysql.init(config.mysql);
 
 var app = express();
 
-// var routes = require('./routes')(app);
+app.locals.SERVER_ROOT = __dirname;
 
-app.use(mySession);
+require('./config/express')(app)
 
-/*  Not overwriting default views directory of 'views' */
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views')
-app.use(express.static('client'));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 /* Routes - consider putting in routes.js */
 app.use('/', require('./api_v1/bookmark'));
 app.use('/v1/user', require('./api_v1/user'));
+app.use('/auth', require('./auth'));
 
-app.listen(config.PORT, function () {
-  console.log('Example app listening on port ' + config.PORT + '!');
+// Using http instead of app.listen because of possible deprecation
+http.createServer(app).listen(config.PORT, function () {
+    console.log('App listening on ' + config.PORT + '!');
 });
+
+module.exports = app;
