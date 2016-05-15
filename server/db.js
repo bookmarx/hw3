@@ -1,4 +1,5 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
+var logger = require('./logger');
 
 var MySQL = function() {
     var connection;
@@ -13,7 +14,15 @@ var MySQL = function() {
             });
 
             MySQL.connection.connect(function(err){
-                console.log('Connecting to MYSQL!')
+                logger.info(
+                    `Connected to MYSQL:
+                    {
+                        host     : ${config.DATABASE_HOST},
+                        user     : ${config.DATABASE_USER},
+                        password : ${config.DATABASE_PASSWORD},
+                        database : ${config.DATABASE_NAME}
+                    }`
+                );
             });
         },
         query: function(querystring, callback){

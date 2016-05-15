@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/app.js"
+    "start": "node server/app.js",
+    "devstart": "export MYSQL_NAME=bookmarx-dev && npm start"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/bookmarx/hw2#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "composable-middleware": "^0.3.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",
@@ -29,6 +31,7 @@
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "winston": "^2.2.0"
   }
 }

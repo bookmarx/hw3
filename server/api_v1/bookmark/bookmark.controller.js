@@ -2,6 +2,7 @@
 
 var db = require('../../db');
 var controller = {};
+
 /**
 *
 * Selects all books and then renders the page with the list.ejs template
@@ -11,7 +12,7 @@ controller.list = function(req, res) {
         var renderBM = [];
         if (err) throw err;
 
-        res.render('index', { bm: bm });
+        res.render('index', { bm: bm, loggedIn: true});
     });
 };
 

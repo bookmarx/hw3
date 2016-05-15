@@ -185,3 +185,15 @@ input[type="button"].button-calm {
 .bm-nav {
     box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
+
+/* Login
+---------------------------------------------------------------*/
+.bm-login {
+    padding: 15px;
+    background-color: #D32F2F;
+    color: white;
+}
+
+.bm-login > input{
+    color: black;
+}
