@@ -7,7 +7,7 @@ var controller = {};
 * Selects all books and then renders the page with the list.ejs template
 */
 controller.list = function(req, res) {
-    db.query('SELECT * from bookmarks ORDER BY id', function(err, bm) {
+    db.query('SELECT * from bookmarks ORDER BY bookmark_id', function(err, bm) {
         var renderBM = [];
         if (err) throw err;
 
