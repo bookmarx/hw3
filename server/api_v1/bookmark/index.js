@@ -6,8 +6,19 @@ var auth = require('../../auth/auth');
 
 var router = express.Router();
 
-router.get('/', controller.list);
+// router.use(function(req, res, next){
+//     console.log('cookies', req.cookies)
+//     // res.renderDefault = function(ejsTemp, opts){
+//     //     this.render(ejsTemp, opts)
+//     // }
+//     next();
+// });
 
+router.use(auth.isAuthenticated());
+
+router.get('/', controller.list);
+// router.get('/filter/:selector', controller.list);
+// router.get('/:search', controller.search);
 
 
 router.get('/editForm/:bid(\\d+)', controller.updateForm);
@@ -16,7 +27,7 @@ router.post('/edit/:bid(\\d+)', controller.update);
 
 
 router.get('/addForm', controller.insertForm);// uid
-router.post('/add/:uid(\\d+)', controller.insert);// uid
+router.post('/add/', controller.insert);// uid
 
 router.get('/deleteForm/:bid(\\d+)', controller.deleteForm);
 router.post('/delete/:bid(\\d+)', controller.delete);

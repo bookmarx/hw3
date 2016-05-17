@@ -79,7 +79,7 @@
     min-width: 400px;
     z-index: 100;
 }
-.bm-nav form{
+.bm-nav nav{
     margin: 0;
     padding: 10px 10px 10px 10px;
 }
@@ -100,26 +100,23 @@
     overflow: hidden;
     outline:none;
 }
-.bm-nav-top button:hover {
-    color: #4fc3f7;
-    border-color: #888;
-    outline: 0;
-}
+
 .bm-nav .bm-title {
     font-size: 26px;
     display: inline;
     color: white;
 }
+.bm-nav-bottom form {
+    display: inline;
+}
 #bm-search {
-    width: 55%;
+    width: 53%;
     padding-right: 0px;
     border-right-width: 0px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
 }
 #bm-sort {
-    float: right;
-    width: 30%;
 }
 /* Footer
 ---------------------------------------------------------------*/
@@ -196,7 +193,13 @@ input[type="button"].button-calm {
     border-top-left-radius: 0;
     /*background: white;*/
     /*border: none;*/
-    margin-left: -5px;
+    margin-left: -8px;
+}
+
+.button.sb-button-submit:hover, .bm-nav-top a.button:hover  {
+    color: #448AFF;
+    border-color: #888;
+    outline: 0;
 }
 .bm-nav {
     box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
@@ -212,4 +215,8 @@ input[type="button"].button-calm {
 
 .bm-login > input{
     color: black;
+}
+
+.bm-error-message {
+    color: #F44336
 }

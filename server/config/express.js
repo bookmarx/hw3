@@ -2,6 +2,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var cookieParser = require('cookie-parser')
 var mySession = session({
   secret: 'N0deJS1sAw3some',
   resave: true,
@@ -18,4 +19,5 @@ module.exports = function(app) {
     app.use(express.static('client'));
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
+    app.use(cookieParser());
 }

@@ -3,22 +3,45 @@
 var db = require('../../db');
 var controller = {};
 
-function getModals(opts){
-    var opts = opts || {};
-    return {
-        addModal: opts.addModal || 0,
-        editModal: opts.editModal || 0,
-        deleteModal: opts.deleteModal || 0,
-        addFolderModal: opts.addFolderModal || 0
-    };
-}
+var util = require('../util.service');
+
+var getModals = util.getModals;
+var filterOptions = util.filterOptions;
+var where = util.where;
+
 
 /**
 *
 * Selects all books and then renders the page with the list.ejs template
 */
 controller.list = function(req, res) {
-    db.query('SELECT * from bookmarks ORDER BY bookmark_id', function(err, bm) {
+    var dd = filterOptions();
+    var orderBy = req.query.orderBy || "";
+    var keyword = req.query.keyword;
+    var uid = req.user.id;
+
+    console.log('orderBy', orderBy);
+    var query = "";
+
+    if(orderBy === "MostRecent"){
+        query = "bookmark_id DESC";
+        dd[0].selected = 'selected';
+    } else if(orderBy === "Favorites"){
+        query = "star ASC";
+        dd[1].selected = 'selected';
+    } else if(orderBy === "Alphabetical"){
+        query = "title ASC";
+        dd[2].selected = 'selected';
+    } else if(orderBy === "Date"){
+        query = "dateAdded ASC";
+        dd[3].selected = 'selected';
+    }  else{
+        query = "title ASC";
+        dd[0].selected = 'selected';
+    }
+    var queryString = `SELECT * FROM bookmarks ${where(keyword, uid)} ORDER BY ${query}`;
+    console.log('queryString', queryString)
+    db.query(queryString, function(err, bm) {
         var renderBM = [];
         if (err) throw err;
 
@@ -30,6 +53,7 @@ controller.list = function(req, res) {
             }
         })
         res.render('index', {
+            dd: dd,
             bm: bm,
             loggedIn: true,
             modals: getModals()
@@ -45,12 +69,12 @@ controller.list = function(req, res) {
 * Renders the add page with the add.ejs template
 */
 controller.insertForm = function(req, res) {
-    var uid = 1;//req.params.uid;
     var m =  getModals({
-        addModal : uid
+        addModal : 1
     })
     console.log('uid', m)
     res.render('index', {
+        dd: filterOptions(),
         loggedIn: true,
         bm :[],
         modals : m
@@ -58,7 +82,7 @@ controller.insertForm = function(req, res) {
 
 };
 controller.insert = function(req, res){
-    var user_id = req.params.uid;
+    var user_id = req.user.id;
     var title = db.escape(req.body.title);
     var url = db.escape(req.body.url);
     var description = db.escape(req.body.description);
@@ -81,10 +105,12 @@ controller.insert = function(req, res){
 */
 controller.updateForm = function(req, res) {
     var bid = req.params.bid;
-    db.query('SELECT * from bookmarks WHERE bookmark_id =  ' + bid, function(err, bookmarks) {
+    var queryString = `SELECT * from bookmarks WHERE bookmark_id =  ${bid}`;
+    db.query(queryString, function(err, bookmarks) {
         if (err) throw err;
 
         res.render('index', {
+            dd: filterOptions(),
             loggedIn: true,
             bm :[],
             modals : getModals({
@@ -121,6 +147,7 @@ controller.deleteForm = function(req, res) {
         if (err) throw err;
 
         res.render('index', {
+            dd: filterOptions(),
             loggedIn: true,
             bm :[],
             modals : getModals({
@@ -145,6 +172,7 @@ controller.delete = function(req, res) {
 controller.addFolderForm = function(req, res){
     var uid = 1;
     res.render('index', {
+        dd: filterOptions(),
         loggedIn: true,
         bm :[],
         modals : getModals({

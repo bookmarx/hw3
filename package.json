@@ -21,17 +21,20 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "composable-middleware": "^0.3.0",
+    "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",
     "express-session": "^1.13.0",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^3.2.2",
     "jsonwebtoken": "^6.2.0",
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "underscore": "^1.8.3",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.0.7"
   }
 }

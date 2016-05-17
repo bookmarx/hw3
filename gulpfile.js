@@ -1,21 +1,17 @@
+// Gulpfile.js
 var gulp = require('gulp'),
-  connect = require('gulp-connect');
+nodemon = require('gulp-nodemon')
 
-gulp.task('connect', function() {
-  connect.server({
-    root: 'client',
-    livereload: true
-  });
-});
 
-gulp.task('html', function () {
-  gulp.src('./client/*.html')
-    .pipe(connect.reload());
-});
+gulp.task('start', function () {
+    nodemon({
+        script: 'server/app.js',
+        ext: 'js html ejs',
+        env: { 'NODE_ENV': 'development' }
+    })
+    .on('restart', function () {
+        console.log('restarted!')
+    })
+})
 
-gulp.task('watch', function () {
-  gulp.watch(['./client/*.html'], ['html']);
-   gulp.watch(['./client/*.css'], ['css']);
-});
-
-gulp.task('default', ['connect', 'watch']);
+gulp.task('default', ['start'])
