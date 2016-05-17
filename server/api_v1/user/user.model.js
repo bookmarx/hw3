@@ -10,8 +10,10 @@ User = {
    * @return {Boolean}
    * @api public
    */
-  authenticate: function(plainText) {
-    return this.encryptPassword(plainText) === this.hashedPassword;
+  authenticate: function(plainText, hashedPassword, salt) {
+      var testHash = this.encryptPassword(plainText, salt);
+      console.log('auth', testHash, ' | ', hashedPassword)
+    return testHash === hashedPassword;
   },
 
   /**
@@ -21,7 +23,7 @@ User = {
    * @api public
    */
   makeSalt: function() {
-    return crypto.randomBytes(32).toString('base64');
+    return crypto.randomBytes(16).toString('base64');
   },
 
   /**
@@ -31,9 +33,9 @@ User = {
    * @return {String}
    * @api public
    */
-  encryptPassword: function(password) {
-    if (!password || !this.salt) return '';
-    var salt = new Buffer(this.salt, 'base64');
+  encryptPassword: function(password, salt) {
+    if (!password || !salt) return '';
+    var salt = new Buffer(salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   }
 };

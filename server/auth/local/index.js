@@ -4,6 +4,7 @@ var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var auth = require('../auth');
+var userModel = require('../../api_v1/user/user.model')
 
 var router = express.Router();
 
@@ -34,9 +35,11 @@ module.exports = function(mysql, config){
                 logger.info('!users', users)
                 return done(null, false, { message: 'This email is not registered.' });
             }
-            // if (!users[0].authenticate(password)) {
-            //     return done(null, false, { message: 'This password is not correct.' });
-            // }
+            var user = users[0];
+
+            if (!userModel.authenticate(password, user.hashedPassword, user.salt)) {
+                return done(null, false, { message: 'This password is not correct.' });
+            }
             return done(null, users[0]);
         });
     }));

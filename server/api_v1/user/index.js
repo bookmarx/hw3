@@ -6,6 +6,8 @@ var controller = require('./user.controller');
 var router = express.Router();
 
 router.get('/', controller.loginForm);
+router.get('/signup', controller.signupForm);
+
 // router.get('/:id', controller.show);
 router.post('/login', controller.login);
 router.post('/signup', controller.signup);
