@@ -3,8 +3,9 @@
         <li>
             <a href="<%= val.url %>"> <%= val.title %> </a>
             <span class="right">
-                <a href="#openEditModal"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                <a href="/bm/star/1234"><i class="fa fa-star" aria-hidden="true"></i></a>
+                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="/v1/bm/editForm/<%= val.bookmark_id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                <a href="/v1/bm/star/<%= val.bookmark_id %>"><i class="fa fa-star" aria-hidden="true"></i></a>
             </span>
 
         </li>

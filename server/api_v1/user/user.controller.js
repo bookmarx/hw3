@@ -21,7 +21,7 @@ controller.login = function(req, res, next){
 
       var token = auth.signToken(user._id, user.role);
       res.cookie('bm_token',token, { expires: new Date(Date.now() + 900000), httpOnly: true });
-      res.send(token)
+      res.redirect('/v1/bm/')
     })(req, res, next)
     // res.redirect('/v1/bm/')
 }

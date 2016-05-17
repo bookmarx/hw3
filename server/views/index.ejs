@@ -26,11 +26,19 @@
                 </form>
             </footer>
         </div>
-        <% include partials/addModal %>
-        <% include partials/editModal %>
-        <% include partials/addFolderModal %>
+
+        <% if(modals.addModal) { %>
+        <%    include partials/addModal %>
+        <% } else if(modals.editModal) { %>
+        <%    include partials/editModal %>
+        <% } else if(modals.addFolderModal) { %>
+        <%    include partials/addFolderModal %>
+        <% } else if(modals.deleteModal) { %>
+        <%    include partials/deleteModal %>
+        <% } %>
+
         <div class="bm-view">
-            <iframe src="http://www.apple.com/"></iframe>
+            <!-- <iframe src="http://www.apple.com/"></iframe> -->
         </div>
     <% } else { %>
         <div class="bm-container dark-primary-color ">
