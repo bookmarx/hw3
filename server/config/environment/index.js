@@ -8,7 +8,7 @@ var defaultSettings = {
     root: path.normalize(__dirname + '/../../..'),
 
     // Server port
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 9000,
 
     mysql : {
         DATABASE_HOST:     process.env.MYSQL_HOST,

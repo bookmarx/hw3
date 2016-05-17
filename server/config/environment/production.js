@@ -5,7 +5,7 @@ module.exports = {
         DATABASE_PASSWORD: 'cse136team4',
         DATABASE_NAME:     'bookmarx'
     },
-    port: process.env.PORT || 9000,
+    port: process.env.PORT || 8080,
     USERNAME: 'cse136User',
     PASSWORD: 'cse136PW'
 };

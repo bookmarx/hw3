@@ -36,10 +36,14 @@ module.exports = function(mysql, config){
                 return done(null, false, { message: 'This email is not registered.' });
             }
             var user = users[0];
-
-            if (!userModel.authenticate(password, user.hashedPassword, user.salt)) {
-                return done(null, false, { message: 'This password is not correct.' });
+            try{
+                if (!userModel.authenticate(password, user.hashedPassword, user.salt)) {
+                    return done(null, false, { message: 'This password is not correct.' });
+                }
+            } catch (e) {
+                return done(err)
             }
+
             return done(null, users[0]);
         });
     }));
