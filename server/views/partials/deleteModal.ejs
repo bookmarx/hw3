@@ -1,0 +1,18 @@
+<div id="openAddModal" class="modal-dialog">
+    <section>
+        <form action="/v1/bm/delete/<%= modals.deleteModal.bookmark_id %>" method="POST">
+            <header class="modal-header dark-primary-color">
+                <h2>Are you sure you wish to delete '<%= modals.deleteModal.bookmark_id %>'</h2>
+            </header>
+            <div class="modal-body">
+            </div>
+            <footer class="modal-footer">
+                <!-- <a href="#close" title="Close" class="button">Delete</a> -->
+                <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
+                <a href="/v1/bm/" title="Close" class="button">Cancel</a>
+                <button input="submit" class="button button-primary">Yes</button>
+
+            </footer>
+        </form>
+    </section>
+</div>

@@ -15,6 +15,9 @@ var defaultSettings = {
         DATABASE_USER:     process.env.MYSQL_USER,
         DATABASE_PASSWORD: process.env.MYSQL_PASS,
         DATABASE_NAME:     process.env.MYSQL_NAME
+    },
+    secrets: {
+        session: 'N0deJS1sAw3some'
     }
 };
 

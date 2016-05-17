@@ -1,6 +1,9 @@
 'use strict';
-
+var passport = require('passport');
 var config = require('../config/environment');
+var jwt = require('jsonwebtoken');
+var expressJwt = require('express-jwt');
+var compose = require('composable-middleware');
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
@@ -31,7 +34,7 @@ function isAuthenticated() {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresIn: 1000 * 60 * 60 * 5 });
 }
 
 /**
@@ -43,3 +46,7 @@ function setTokenCookie(req, res) {
   res.cookie('token', JSON.stringify(token));
   res.redirect('/');
 }
+
+exports.isAuthenticated = isAuthenticated;
+exports.signToken = signToken;
+exports.setTokenCookie = setTokenCookie;

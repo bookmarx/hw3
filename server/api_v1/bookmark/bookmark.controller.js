@@ -2,6 +2,17 @@
 
 var db = require('../../db');
 var controller = {};
+
+function getModals(opts){
+    var opts = opts || {};
+    return {
+        addModal: opts.addModal || 0,
+        editModal: opts.editModal || 0,
+        deleteModal: opts.deleteModal || 0,
+        addFolderModal: opts.addFolderModal || 0
+    };
+}
+
 /**
 *
 * Selects all books and then renders the page with the list.ejs template
@@ -11,42 +22,103 @@ controller.list = function(req, res) {
         var renderBM = [];
         if (err) throw err;
 
-        res.render('index', { bm: bm });
+        res.render('index', {
+            bm: bm,
+            loggedIn: true,
+            modals: getModals()
+        });
     });
 };
 
-/**
-*
-* Selects information about passed in book and then
-* renders the delete confirmation page with the delete.ejs template
-*/
-controller.confirmdelete = function(req, res){
-    var id = req.params.book_id;
-    db.query('SELECT * from books WHERE id =  ' + id, function(err, book) {
-        if (err) throw err;
-        res.render('books/delete', {book: book[0]});
-    });
-};
+
 
 /**
 *
 * Renders the add page with the add.ejs template
 */
-controller.add = function(req, res) {
-    res.render('books/add');
+controller.insertForm = function(req, res) {
+    var uid = req.params.uid;
+    var m =  getModals({
+        addModal : uid
+    })
+    console.log('uid', m)
+    res.render('index', {
+        loggedIn: true,
+        bm :[],
+        modals : m
+    });
+
 };
+controller.insert = function(req, res){
+    var user_id = req.params.uid;
+    var title = db.escape(req.body.title);
+    var url = db.escape(req.body.url);
+    var description = db.escape(req.body.description);
+    var keywords = db.escape(req.body.keywords);
+    var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords) VALUES ('+user_id+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords +')';
+        db.query(queryString, function(err){
+            res.redirect('/v1/bm/');
+        });
+}
+
+
+
+
+
 
 /**
 *
 * Selects information about the passed in bood and then
 * renders the edit confirmation page with the edit.ejs template
 */
-controller.edit = function(req, res) {
-    var id = req.params.book_id;
-    db.query('SELECT * from books WHERE id =  ' + id, function(err, book) {
+controller.updateForm = function(req, res) {
+    var bid = req.params.bid;
+    db.query('SELECT * from bookmarks WHERE bookmark_id =  ' + bid, function(err, bookmarks) {
         if (err) throw err;
 
-        res.render('books/edit', {book: book[0]});
+        res.render('index', {
+            loggedIn: true,
+            bm :[],
+            modals : getModals({
+                editModal : bookmarks[0]
+            })
+        });
+    });
+};
+controller.update = function(req, res){
+    var bid = req.params.bid;
+    var title = db.escape(req.body.title);
+    var url = db.escape(req.body.url);
+    var description = db.escape(req.body.description);
+    var keywords = db.escape(req.body.keywords);
+
+    // if(url.substring(0,6) != "http://"){
+    //     url = "http://" + url;
+    // }
+
+    var queryString = 'UPDATE bookmarks SET title = ' + title + ', url = ' + url + ', description = ' + description+ ', keywords = ' + keywords + ' WHERE bookmark_id = ' + bid;
+    db.query(queryString, function(err){
+        if (err) throw err;
+        res.redirect('/v1/bm/');
+    });
+};
+
+
+
+
+
+controller.deleteForm = function(req, res) {
+    var bid = req.params.bid;
+    db.query('SELECT * from bookmarks WHERE bookmark_id =  ' + bid, function(err, bookmarks) {
+        if (err) throw err;
+
+        res.render('index', {
+            loggedIn: true,
+            bm :[],
+            modals : getModals({
+                deleteModal : bookmarks[0]
+            })
+        });
     });
 };
 
@@ -55,43 +127,13 @@ controller.edit = function(req, res) {
 * Does a redirect to the list page
 */
 controller.delete = function(req, res) {
-    var id = req.params.book_id;
-    db.query('DELETE from books where id = ' + id, function(err){
+    var bid = req.params.bid;
+    db.query('DELETE from bookmarks where bookmark_id = ' + bid, function(err){
         if (err) throw err;
-        res.redirect('/books');
+        res.redirect('/v1/bm/');
     });
 };
 
-/**
-* Adds a new book to the database
-* Does a redirect to the list page
-*/
-controller.insert = function(req, res){
-    var title = db.escape(req.body.title);
-    var author = db.escape(req.body.author);
-    var price = db.escape(req.body.price);
 
-    var queryString = 'INSERT INTO books (title, author, price) VALUES (' + title + ', ' + author + ', ' + price + ')';
-    db.query(queryString, function(err){
-        res.redirect('/books');
-    });
-};
-
-/**
-* Updates a book in the database
-* Does a redirect to the list page
-*/
-controller.update = function(req, res){
-    var id = req.params.book_id;
-    var title = db.escape(req.body.title);
-    var author = db.escape(req.body.author);
-    var price = db.escape(req.body.price);
-
-    var queryString = 'UPDATE books SET title = ' + title + ', author = ' + author + ', price = ' + price + ' WHERE id = ' + id;
-    db.query(queryString, function(err){
-        if (err) throw err;
-        res.redirect('/books');
-    });
-};
 
 module.exports = controller;

@@ -17,4 +17,5 @@ module.exports = function(app) {
     app.set('views', app.locals.SERVER_ROOT + '/views')
     app.use(express.static('client'));
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
 }
