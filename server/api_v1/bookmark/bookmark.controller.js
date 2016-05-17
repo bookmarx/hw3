@@ -22,11 +22,19 @@ controller.list = function(req, res) {
         var renderBM = [];
         if (err) throw err;
 
+        bm.forEach(function(val, key){
+            if(val.star){
+                val.starCSS = "fa-star";
+            }else{
+                val.starCSS = "fa-star-o";
+            }
+        })
         res.render('index', {
             bm: bm,
             loggedIn: true,
             modals: getModals()
         });
+
     });
 };
 
@@ -37,7 +45,7 @@ controller.list = function(req, res) {
 * Renders the add page with the add.ejs template
 */
 controller.insertForm = function(req, res) {
-    var uid = req.params.uid;
+    var uid = 1;//req.params.uid;
     var m =  getModals({
         addModal : uid
     })
@@ -133,6 +141,44 @@ controller.delete = function(req, res) {
         res.redirect('/v1/bm/');
     });
 };
+
+controller.addFolderForm = function(req, res){
+    var uid = 1;
+    res.render('index', {
+        loggedIn: true,
+        bm :[],
+        modals : getModals({
+            addFolderModal : uid
+        })
+    });
+};
+/**
+* add a folder to db
+*/
+controller.addFolder = function(req, res){
+    var name = db.escape(req.body.name);
+    var descrip = db.escape(req.body.description);
+    var keyword = db.escape(req.body.keyword);
+
+    var queryString = 'INSERT INTO folders (name, description, keyword) VALUES (' + name +', ' + descrip + ', ' + keyword + ')';
+    db.query(queryString , function(err){
+        if(err) throw err;
+        res.redirect('/v1/bm/');
+    });
+};
+
+/**
+* Star a bookmark
+* Redirect to the main page
+*/
+
+controller.star = function(req, res){
+    var id  = req.params.bookmark_id;
+    db.query('UPDATE bookmarks SET star = !star WHERE bookmark_id = ' + id, function(err){
+      if(err) throw err;
+      res.redirect('/v1/bm/');
+    })
+}
 
 
 
