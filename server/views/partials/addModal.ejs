@@ -8,7 +8,7 @@
                 <label for="name-add">Name</label>
                 <input type="text" placeholder="Name" id="name-add" name="title" required>
                 <label for="address-add">URL</label>
-                <input type="text" placeholder="URL" id="address-add" name="url" required>
+                <input type="text" placeholder="URL" id="address-add" name="url" pattern="(http:\/\/.*)|(https:\/\/.*)" title="Must contain http:// or https://" required>
                 <label for="description-add">Description</label>
                 <textarea placeholder="Description" id="description-add" name="description"></textarea>
                 <label for="keyword-add">Keyword</label>

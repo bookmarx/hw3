@@ -7,9 +7,9 @@
             </header>
             <div class="modal-body">
                 <label for="name-edit">Name</label>
-                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.bm.title %>" name="title">
+                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.bm.title %>" name="title" required> 
                 <label for="address-edit">URL</label>
-                <input type="text" placeholder="URL" id="address-edit" value="<%= modals.editModal.bm.url %>" name="url">
+                <input type="text" placeholder="URL" id="address-edit" value="<%= modals.editModal.bm.url %>" name="url" pattern="(http:\/\/.*)|(https:\/\/.*)" title="Must contain http:// or https://"  required>
                 <label for="description-edit">Description</label>
                 <textarea placeholder="Description" id="description-edit" name="description"><%= modals.editModal.bm.description %></textarea>
                 <label for="keyword-edit">Keyword</label>
