@@ -123,6 +123,7 @@ controller.changePassword = function(req, res){
 
 controller.changePasswordForm = function(req, res){
     res.render('index', {
+        folders: {},
         dd: filterOptions(),
         bm: [],
         modals: getModals({

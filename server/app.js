@@ -28,4 +28,4 @@ http.createServer(app).listen(config.port, function () {
     logger.info('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-module.exports = app;
+exports = module.exports = app;

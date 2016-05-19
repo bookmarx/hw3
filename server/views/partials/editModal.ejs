@@ -1,19 +1,35 @@
 <!-- Edit Modal -->
 <div id="openEditModal" class="modal-dialog">
     <section>
-        <form action="/v1/bm/edit/<%= modals.editModal.bookmark_id %>" method="POST">
+        <form action="/v1/bm/edit/<%= modals.editModal.bm.bookmark_id %>" method="POST">
             <header class="modal-header dark-primary-color">
                 <h2>Edit Bookmark</h2>
             </header>
             <div class="modal-body">
                 <label for="name-edit">Name</label>
-                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.title %>" name="title">
+                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.bm.title %>" name="title">
                 <label for="address-edit">URL</label>
-                <input type="text" placeholder="URL" id="address-edit" value="<%= modals.editModal.url %>" name="url">
+                <input type="text" placeholder="URL" id="address-edit" value="<%= modals.editModal.bm.url %>" name="url">
                 <label for="description-edit">Description</label>
-                <textarea placeholder="Description" id="description-edit" name="description"><%= modals.editModal.description %></textarea>
+                <textarea placeholder="Description" id="description-edit" name="description"><%= modals.editModal.bm.description %></textarea>
                 <label for="keyword-edit">Keyword</label>
-                <input type="text" placeholder="Keyword" id="keyword-edit" value="<%= modals.editModal.keywords %>" name="keywords">
+                <input type="text" placeholder="Keyword" id="keyword-edit" value="<%= modals.editModal.bm.keywords %>" name="keywords">
+
+                <label for="folders">Folders</label>
+                <select name="folders">
+                    <% modals.editModal.folders.forEach(function(val, key){%>
+                        <option value="<%= val.folder_id %>"><%= val.name %></option>
+                    <% }); %>
+
+                </select>
+
+
+                <% if(modals.editModal.errorMessage) { %>
+                <p style="color: red;"><%= modals.addModal.errorMessage %></p>
+                <% } %>
+
+
+
             </div>
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->

@@ -3,6 +3,7 @@
 var express = require('express');
 var controller = require('./bookmark.controller');
 var auth = require('../../auth/auth');
+var util = require('../util.service');
 
 var router = express.Router();
 
@@ -13,7 +14,7 @@ var router = express.Router();
 //     // }
 //     next();
 // });
-
+router.use(util.renderModalMiddleware())
 router.use(auth.isAuthenticated());
 
 router.get('/', controller.list);
