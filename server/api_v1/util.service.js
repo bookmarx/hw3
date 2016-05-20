@@ -36,11 +36,11 @@ function filterOptions(){
         value: 'MostRecent',
         selected: ''
     },
-    // {
-    //     name: 'Favorites',
-    //     value: 'Favorites',
-    //     selected: ''
-    // },
+    {
+        name: 'Favorites',
+        value: 'Favorites',
+        selected: ''
+    },
     {
         name: 'Alphabetical',
         value: 'Alphabetical',

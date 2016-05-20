@@ -129,7 +129,7 @@
     border-top-right-radius: 0px;
 }
 #bm-sort {
-
+    margin-right: 5px;
 }
 /* Footer
 ---------------------------------------------------------------*/
@@ -195,13 +195,17 @@ input[type="button"].button-calm {
     background-color: #4caf50;
     border-color: #4caf50;
 }
-.button.sb-button-submit {
+.button.sb-button-submit, .button.bm-icon-button {
     color: #FFF;
     background-color: #33C3F0;
     border-color: #33C3F0;
     padding: 8px;
     border-left-width: 0px;
     margin-left: 0px;
+
+}
+
+.button.sb-button-submit {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     /*background: white;*/
@@ -214,6 +218,7 @@ input[type="button"].button-calm {
     border-color: #888;
     outline: 0;
 }
+
 .bm-nav {
     box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }

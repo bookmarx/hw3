@@ -28,7 +28,7 @@ controller.list = function(req, res) {
         query = "bookmark_id DESC";
         dd[0].selected = 'selected';
     } else if(orderBy === "Favorites"){
-        query = "star ASC";
+        query = "star DESC";
         dd[1].selected = 'selected';
     } else if(orderBy === "Alphabetical"){
         query = "title ASC";

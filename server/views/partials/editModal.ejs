@@ -7,7 +7,7 @@
             </header>
             <div class="modal-body">
                 <label for="name-edit">Name</label>
-                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.bm.title %>" name="title" required> 
+                <input type="text" placeholder="Name" id="name-edit" value="<%= modals.editModal.bm.title %>" name="title" required>
                 <label for="address-edit">URL</label>
                 <input type="text" placeholder="URL" id="address-edit" value="<%= modals.editModal.bm.url %>" name="url" pattern="(http:\/\/.*)|(https:\/\/.*)" title="Must contain http:// or https://"  required>
                 <label for="description-edit">Description</label>
@@ -33,7 +33,7 @@
             </div>
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
-                <a href="#close" title="Close" class="button button-danger">Delete</a>
+                <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
                 <a href="/v1/bm/" title="Close" class="button">Cancel</a>
                 <button type="submit" class="button button-primary">Save</button>
 
