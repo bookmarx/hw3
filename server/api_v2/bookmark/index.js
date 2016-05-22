@@ -22,21 +22,21 @@ router.get('/', controller.list);
 // router.get('/:search', controller.search);
 
 
-router.get('/editForm/:bid(\\d+)', controller.updateForm);
+// router.get('/editForm/:bid(\\d+)', controller.updateForm);
 router.post('/edit/:bid(\\d+)', controller.update);
 
 
 
-router.get('/addForm', controller.insertForm);// uid
+// router.get('/addForm', controller.insertForm);// uid
 router.post('/add/', controller.insert);// uid
 
-router.get('/deleteForm/:bid(\\d+)', controller.deleteForm);
+// router.get('/deleteForm/:bid(\\d+)', controller.deleteForm);
 router.post('/delete/:bid(\\d+)', controller.delete);
 
 
 router.get('/star/:bookmark_id', controller.star);
 
-router.get('/addFolderForm', controller.addFolderForm); // uid
+// router.get('/addFolderForm', controller.addFolderForm); // uid
 router.post('/addFolder', controller.addFolder); // uid
 // router.get('/:id', controller.show);
 // router.post('/', controller.create);
