@@ -31,7 +31,6 @@ describe('bookmark', function(){
         var bmp = bookmark.list(request, response);
 
         response.on('end', function() {
-
             var data = JSON.parse( response._getData() );
             console.log('response', data)
             expect(response.statusCode).to.equal(200);

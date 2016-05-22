@@ -1,4 +1,5 @@
 var util = require('./scripts/util.service.js');
+var axios = require('axios');
 
 function loadTemplate(name, data){
     var template = require('./views/'+ name +'.ejs');

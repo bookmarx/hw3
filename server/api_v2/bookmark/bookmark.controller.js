@@ -34,7 +34,7 @@ controller.list = function(req, res) {
     var bm2 = Bookmark.getFoldersByUser(keyword, uid);
 
     // Wait for Promise 1 & Promise 2
-    return Promise.all([bm1, bm2]).then(function(val) {
+    Promise.all([bm1, bm2]).then(function(val) {
         val[0].forEach(function(val, key){
             val.starCSS = util.starValToCss(val.star);
             bookmarks.push(val)
@@ -52,15 +52,15 @@ controller.list = function(req, res) {
             modals: getModals()
         }
 
-        // res.render('index', resData);
+        // TODO:  res.render('index', resData);
         res.json(resData);
     }, function(reason) {
-        console.log('rejected 1', reason);
-        // res.render()
+        logger.error('[ bookmark.controller.js - Promise.all() ]', err);
+        // TODO:  res.render()
         res.status(500).send(reason);
     }).catch(function(err){
-        console.log('rejected 2', err);
-        // res.render()
+        logger.error('[ bookmark.controller.js - Promise.all().catch() ]', err);
+        // TODO: res.render()
         res.status(500).send(err);
     })
 };
