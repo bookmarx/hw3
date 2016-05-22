@@ -12,11 +12,11 @@ var filterOptions = util.filterOptions;
 
 
 controller.loginForm = function(req, res){
-    res.render('login', { errorMessage: '' })
+    res.render('login', { errorMessage: ''})
 }
 controller.signupForm = function(req, res){
     var errorMessage = req.query.errorMessage;
-    res.render('signup', { errorMessage: '' })
+    res.render('signup', { errorMessage: ''})
 }
 
 /**
@@ -33,9 +33,9 @@ controller.login = function(req, res, next){
         console.log('login user',  user)
         var token = auth.signToken(user.id, user.username);
         res.cookie('bm_token', token, { expires: new Date(Date.now() + 900000), httpOnly: true });
-        res.redirect('/v1/bm/')
+        res.redirect('/app')
     })(req, res, next)
-    // res.redirect('/v1/bm/')
+    // res.redirect('/v2/bm/')
 }
 
 /**
@@ -68,7 +68,7 @@ controller.signup = function(req, res){
         } else if (err)  {
             return res.render('signup', { errorMessage: 'Sign up failed try again!' });
         }
-        res.redirect('/v1/');
+        res.redirect('/v2/');
     });
 };
 
@@ -77,8 +77,8 @@ controller.signup = function(req, res){
 */
 controller.logout = function(req, res){
     res.clearCookie('bm_token');
-    res.redirect('/v1/');
-    // res.redirect('/v1/bm/')
+    res.redirect('/v2/');
+    // res.redirect('/v2/bm/')
 }
 
 controller.changePassword = function(req, res){
@@ -111,7 +111,7 @@ controller.changePassword = function(req, res){
                 console.log('update error', err)
                 return res.renderModal({ changeModal: { errorMessage: 'Sign up failed try again!'  } });
             }
-            res.redirect('/v1/bm/');
+            res.redirect('/v2/bm/');
         });
 
     } else {

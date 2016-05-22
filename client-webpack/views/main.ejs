@@ -1,0 +1,30 @@
+<div class="bm-container">
+    <nav class="bm-nav dark-primary-color">
+        <% include partials/header %>
+    </nav>
+    <div class="bm-content">
+        <% include partials/list %>
+    </div>
+    <footer class="bm-footer dark-primary-color">
+        <form action="" method="get">
+            <button type="submit" class="button-primary"><i class="fa fa-upload"></i> Import</button>
+            <button type="submit" class="button-primary" action="/example.csv"><i class="fa fa-download"></i> Export</button>
+        </form>
+    </footer>
+</div>
+
+<% if(modals.addModal) { %>
+<%    include partials/addModal %>
+<% } else if(modals.editModal) { %>
+<%    include partials/editModal %>
+<% } else if(modals.addFolderModal) { %>
+<%    include partials/addFolderModal %>
+<% } else if(modals.deleteModal) { %>
+<%    include partials/deleteModal %>
+<% } else if(modals.changeModal) { %>
+<%    include partials/change %>
+<% } %>
+
+<!-- <div class="bm-view">
+    <iframe src="http://www.apple.com/"></iframe>
+</div> -->

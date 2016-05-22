@@ -19,9 +19,10 @@ require('./config/express')(app)
 /* Routes - consider putting in routes.js */
 app.use('/auth', require('./auth'));
 
-app.use('/v1/bm', require('./api_v1/bookmark'));
-app.use('/v1', require('./api_v1/user'));
+app.use('/', require('./api_v2/user'));
 
+app.use('/v1/bm', require('./api_v1/bookmark'));
+app.use('/v2/bm', require('./api_v2/bookmark'));
 
 // Using http instead of app.listen because of possible deprecation
 http.createServer(app).listen(config.port, function () {

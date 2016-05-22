@@ -23,6 +23,7 @@
     "composable-middleware": "^0.3.0",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
+    "ejs-compiled-loader": "^2.1.1",
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",
     "express-session": "^1.13.0",

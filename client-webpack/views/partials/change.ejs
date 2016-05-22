@@ -1,0 +1,31 @@
+<div id="changeModal" class="modal-dialog">
+    <section>
+        <form action="/v1/change/" method="POST">
+            <header class="modal-header dark-primary-color">
+                <h2>Change Password</h2>
+            </header>
+            <div class="modal-body">
+                <!-- <label for="name-add">Username</label>
+                <input type="email" placeholder="test@test.com" name="username"> -->
+                <label for="keyword-add">Old Password</label>
+                <input type="password" placeholder="old" name="oldPassword">
+                <label for="keyword-add">New Password</label>
+                <input type="password" placeholder="new" name="newPassword">
+                <label for="keyword-add">Retype New Password</label>
+                <input type="password" placeholder="again" name="reNewPassword">
+                <% if(modals.changeModal.errorMessage) { %>
+                <p class="bm-error-message">
+                    <%= modals.changeModal.errorMessage %>
+                <p>
+                <% } %>
+            </div>
+            <footer class="modal-footer">
+                <!-- <a href="#close" title="Close" class="button">Delete</a> -->
+                <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
+                <a href="/v1/bm/" title="Close" class="button">Cancel</a>
+                <button input="submit" class="button button-primary">Save</button>
+
+            </footer>
+        </form>
+    </section>
+</div>

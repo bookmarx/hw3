@@ -1,0 +1,26 @@
+<nav>
+    <div class="bm-nav-top row">
+        <h4 class="bm-title">Bookmarx</h4>
+        <div class="right">
+            <a href="/v1/bm/addForm" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Form"></a>
+            <a href="/v1/bm/addFolderForm" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder"></a>
+            <a href="/v1/change" class="button fa fa-cog fa-2x" aria-hidden="true" title="Change Password"></a>
+            <a href="/v1/logout" class="button fa fa-sign-out fa-2x" aria-hidden="true" title="Logout"></a>
+        </div>
+    </div>
+    <div class="bm-nav-bottom row">
+        <form action="/v1/bm/" method="GET">
+            <input id="bm-search" type="text" name="keyword" placeholder="Search bookmarks">
+            <button type="submit" class="button sb-button-submit fa fa-search" ></button>
+        </form>
+        <form action="/v1/bm/" method="GET">
+            <select id="bm-sort" name="orderBy">
+                <% dd.forEach(function(val, key){%>
+                    <option value="<%= val.value %>" <%= val.selected %>><%= val.name %></option>
+                <% }); %>
+
+            </select>
+            <button type="submit" class="button bm-icon-button fa fa-filter" ></button>
+        </form>
+    </div>
+</nav>
