@@ -1,5 +1,5 @@
 var util = require('../util.service');
-
+var db = require('../../db')
 /* Interface
 ---------------------------------------------------------------*/
 exports.where = where;
@@ -28,11 +28,11 @@ function findFoldersByUser(keyword, uid){
     FROM bookmarks
     RIGHT JOIN folders on bookmarks.folder_id = folders.folder_id
     ${where(keyword, uid)} AND folders.user_id = ${uid}`;
-    return queryP(queryString);
+    return db.queryP(queryString);
 }
 
 
 function find(keyword, uid, orderBy){
     var queryString = `SELECT * FROM bookmarks ${where(keyword, uid)} AND bookmarks.folder_id < 1 ORDER BY ${orderBy}`;
-    return queryP(queryString);
+    return db.queryP(queryString);
 }

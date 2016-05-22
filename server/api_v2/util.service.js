@@ -64,7 +64,7 @@ function filterOptions(orderBy){
         selected: '',
         orderFilter: 'title ASC'
     }];
-    var selectedVal;
+    var filter = 'title ASC';
 
     for(var i = 0; i < options; i++){
         if(options[i].value === orderBy){
@@ -83,9 +83,8 @@ function filterOptions(orderBy){
 function queryP(query){
     return new Promise(function(resolve, reject){
         db.query(query, function(err, data){
-
             if(err){
-                logger.error(err)
+                logger.error('queryP error', err)
                 return reject(err);
             }
             logger.info('queryP', JSON.stringify(data, null, 2))

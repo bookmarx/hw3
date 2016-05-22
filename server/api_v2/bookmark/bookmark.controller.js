@@ -27,31 +27,27 @@ controller.list = function(req, res) {
 
     // Promise 1:
     var bookmarks = [];
-    var bm1 = Bookmark.find(keyword, uid, options.filter)
-    .then(function(bms){
-            bms.forEach(function(val, key){
-                val.starCSS = util.starValToCss(val.star);
-                bookmarks.push(val)
-            })
-    })
+    var bm1 = Bookmark.find(keyword, uid, options.filter);
 
     // Promise 2:
     var folders = {};
-    var bm2 = Bookmark.getFoldersByUser(keyword, uid)
-    .then(function(folds){
-        folds.forEach(function(val, key){
+    var bm2 = Bookmark.getFoldersByUser(keyword, uid);
+
+    // Wait for Promise 1 & Promise 2
+    return Promise.all([bm1, bm2]).then(function(val) {
+        val[0].forEach(function(val, key){
+            val.starCSS = util.starValToCss(val.star);
+            bookmarks.push(val)
+        })
+        val[1].forEach(function(val, key){
             if(!folders[val.name]){ folders[val.name] = []; }
             val.starCSS = util.starValToCss(val.star);
             folders[val.name].push(val)
         })
-    })
-
-    // Wait for Promise 1 & Promise 2
-    Promise.all([bm1, bm2]).then(function(values) {
         var resData =  {
             dd: options.dd,
-            bm: renderBM,
-            folders : foldersObj,
+            bm: bookmarks,
+            folders : folders,
             loggedIn: true,
             modals: getModals()
         }
@@ -59,56 +55,17 @@ controller.list = function(req, res) {
         // res.render('index', resData);
         res.json(resData);
     }, function(reason) {
-        console.log('rejected', reason);
+        console.log('rejected 1', reason);
         // res.render()
         res.status(500).send(reason);
-    });
-};
-
-
-
-/**
-*
-* Renders the add page with the add.ejs template
-*/
-controller.insertForm = function(req, res) {
-    var uid = req.user.id;
-    var queryString = `SELECT *
-    FROM folders
-    WHERE folders.user_id = ${uid}`;
-    var folders = [{
-        name: 'None',
-        folder_id: -1
-    }];
-    util.queryP(queryString)
-    .then(function(data){
-        data.forEach(function(val, key){
-            folders.push(val);
-        });
-
-        var m =  getModals({
-            addModal : {
-                folders: folders
-            }
-        })
-        console.log('getModals', JSON.stringify(m))
-
-        res.render('index', {
-            folders: {},
-            dd: filterOptions(),
-            loggedIn: true,
-            bm :[],
-            modals : m
-        });
+    }).catch(function(err){
+        console.log('rejected 2', err);
+        // res.render()
+        res.status(500).send(err);
     })
-    .catch(function(err){
-
-    });
-
-
-
-
 };
+
+
 controller.insert = function(req, res){
     var user_id = req.user.id;
     var title = db.escape(req.body.title);
@@ -135,69 +92,6 @@ controller.insert = function(req, res){
 }
 
 
-
-
-
-
-/**
-*
-* Selects information about the passed in bood and then
-* renders the edit confirmation page with the edit.ejs template
-*/
-controller.updateForm = function(req, res) {
-    var bid = req.params.bid;
-    var uid = req.user.id;
-
-
-
-
-
-    var queryString = `SELECT * from bookmarks WHERE bookmark_id =  ${bid}`;
-    db.query(queryString, function(err, bookmarks) {
-        // if (err) throw err;
-
-
-
-        var queryString = `SELECT *
-        FROM folders
-        WHERE folders.user_id = ${uid}`;
-        var folders = [{
-            name: 'None',
-            folder_id: -1
-        }];
-        util.queryP(queryString)
-        .then(function(data){
-            data.forEach(function(val, key){
-                folders.push(val);
-            });
-
-            var m =  getModals({
-                editModal : {
-                    bm: bookmarks[0],
-                    folders: folders
-                }
-            })
-            console.log('getModals', JSON.stringify(m))
-
-            res.render('index', {
-                folders: {},
-                dd: filterOptions(),
-                loggedIn: true,
-                bm :[],
-                modals : m
-            });
-        })
-        .catch(function(err){
-
-        });
-
-
-
-
-
-
-    });
-};
 controller.update = function(req, res){
     var bid = req.params.bid;
     var title = db.escape(req.body.title);
@@ -224,24 +118,6 @@ controller.update = function(req, res){
 
 
 
-
-controller.deleteForm = function(req, res) {
-    var bid = req.params.bid;
-    db.query('SELECT * from bookmarks WHERE bookmark_id =  ' + bid, function(err, bookmarks) {
-        if (err) throw err;
-
-        res.render('index', {
-            folders: {},
-            dd: filterOptions(),
-            loggedIn: true,
-            bm :[],
-            modals : getModals({
-                deleteModal : bookmarks[0]
-            })
-        });
-    });
-};
-
 /**
 * Deletes the passed in book from the database.
 * Does a redirect to the list page
@@ -254,18 +130,6 @@ controller.delete = function(req, res) {
     });
 };
 
-controller.addFolderForm = function(req, res){
-    var uid = 1;
-    res.render('index', {
-        folders: {},
-        dd: filterOptions(),
-        loggedIn: true,
-        bm :[],
-        modals : getModals({
-            addFolderModal : uid
-        })
-    });
-};
 /**
 * add a folder to db
 */
