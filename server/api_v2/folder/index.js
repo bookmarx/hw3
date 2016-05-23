@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./bookmark.controller');
+var controller = require('./folder.controller');
 var auth = require('../../auth/auth');
 var util = require('../util.service');
 
@@ -16,6 +16,10 @@ router.use(auth.isAuthenticated());
 // router.post('/delete/:bid(\\d+)', controller.delete);
 // router.get('/star/:bookmark_id', controller.star);
 
-router.post('/addFolder', controller.addFolder); // uid
+router.get('/', controller.list);
+router.get('/:id', controller.show);
+router.post('/', controller.create);
+router.update('/:id', controller.update);
+router.delete('/:id', controller.delete);
 
 module.exports = router;

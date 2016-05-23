@@ -1,4 +1,7 @@
-var axios = require('axios'); 
+
+var bookmark = require('./bookmark');
+
+
 exports.filterOptions = filterOptions;
 exports.getModals = getModals;
 exports.createOptions = createOptions;
@@ -83,71 +86,11 @@ function loadTemplate(name, data){
 /**
 * Main Template Loader for EJS
 */
-
 function load(data){
-    loadTemplate('main', createOptions(data))
-    addListeners();
+    loadTemplate('main', createOptions(data));
+    addLoadListener(load);
 }
 
-
-function addListeners(){
-    document.getElementById("bm-search-form").addEventListener("submit", function(event){
-        event.preventDefault();
-        
-        var searchValue = document.getElementById("bm-search").value;
-       
-
-        path = '/v2/bm';
-        param = {
-            params: {
-              keyword: searchValue
-            }
-        };
-       
-        makeAxiosCall(path, param);
-    }); 
-
-    document.getElementById("bm-search-button").addEventListener("click", function(event){
-        event.preventDefault();
-        
-        var searchValue = document.getElementById("bm-search").value;
-       
-
-        path = '/v2/bm';
-        param = {
-            params: {
-              keyword: searchValue
-            }
-        };
-       
-        makeAxiosCall(path, param);
-    }); 
-
-    document.getElementById("bm-filter-button").addEventListener("click", function(event){
-        event.preventDefault();
-        
-        var sortValue = document.getElementById("bm-sort").value;
-
-        path = '/v2/bm';
-        param = {
-            params: {
-              orderBy: sortValue
-            }
-        };
-        makeAxiosCall(path, param);
-    }); 
-
-
-}
-
-function makeAxiosCall(path, param){
-    axios.get(path, param)
-    .then(function (response) {
-        if(response.status == 200){
-            load(response.data);
-        }
-    })
-    .catch(function (response) {
-        console.log('Error', response);
-    });
+function addLoadListener(load){
+    bookmark.addListeners(load);
 }

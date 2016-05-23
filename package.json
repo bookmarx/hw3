@@ -22,6 +22,7 @@
     "axios": "^0.11.1",
     "body-parser": "^1.15.1",
     "composable-middleware": "^0.3.0",
+    "compression": "^1.6.2",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "ejs-compiled-loader": "^2.1.1",

@@ -2,7 +2,7 @@
 
 [ ![Codeship Status for bookmarx/hw3](https://codeship.com/projects/30b9c5e0-029a-0134-086d-663251dd2b3e/status?branch=master)](https://codeship.com/projects/153629)
 
-### Phase 
+### Phase
 Phase 1 branch: master-phase-1
 
 Phase 2 branch: master-phase-2
@@ -10,6 +10,8 @@ Phase 2 branch: master-phase-2
 App Structure
 ```
 /client    -- Public HTML Served by the Node Server, client-side app
+
+/client-webpack    -- Webpack files compiled for client
 
 /server    -- The server-side app
    /api_v1 -- Version 1 of our API, contains each api as a subdirectory

@@ -1,10 +1,16 @@
 var Folder = require('folder.model.js');
 
 var controller = {};
+
 /**
-* add a folder to db
+* list folders
 */
-controller.addFolder = function(req, res){
+controller.list = function(req, res){};
+
+/**
+* create a folder
+*/
+controller.create = function(req, res){
     var uid = req.user.id;
     var name = db.escape(req.body.name);
     var desc = db.escape(req.body.description);
@@ -23,5 +29,20 @@ controller.addFolder = function(req, res){
         //Handle Error
     })
 };
+
+/**
+* show a folder
+*/
+controller.show = function(req, res){};
+
+/**
+* update a folder
+*/
+controller.update = function(req, res){};
+
+/**
+* delete a folder
+*/
+controller.delete = function(req, res){};
 
 module.exports = controller;
