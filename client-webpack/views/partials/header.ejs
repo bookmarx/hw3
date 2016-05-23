@@ -9,11 +9,11 @@
         </div>
     </div>
     <div class="bm-nav-bottom row">
-        <form action="/v1/bm/" method="GET">
+        <form action="#" method="GET">
             <input id="bm-search" type="text" name="keyword" placeholder="Search bookmarks">
-            <button type="submit" class="button sb-button-submit fa fa-search" ></button>
+            <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" ></button>
         </form>
-        <form action="/v1/bm/" method="GET">
+        <form action="#" method="GET">
             <select id="bm-sort" name="orderBy">
                 <% dd.forEach(function(val, key){%>
                     <option value="<%= val.value %>" <%= val.selected %>><%= val.name %></option>

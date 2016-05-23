@@ -130,21 +130,6 @@ controller.delete = function(req, res) {
     });
 };
 
-/**
-* add a folder to db
-*/
-controller.addFolder = function(req, res){
-    var uid = req.user.id;
-    var name = db.escape(req.body.name);
-    var desc = db.escape(req.body.description);
-    var keyword = db.escape(req.body.keyword);
-
-    var queryString = 'INSERT INTO folders (name, description, keyword, user_id) VALUES (' + name +', ' + desc + ', ' + keyword + ', ' + uid + ')';
-    db.query(queryString , function(err){
-        if(err) throw err;
-        res.redirect('/v1/bm/');
-    });
-};
 
 /**
 * Star a bookmark
