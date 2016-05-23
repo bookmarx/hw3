@@ -1,6 +1,8 @@
 exports.filterOptions = filterOptions;
 exports.getModals = getModals;
-
+exports.createOptions = createOptions;
+exports.loadTemplate = loadTemplate;
+exports.load = load;
 function filterOptions(orderBy){
     var options = [{
         name: 'Most Recent',
@@ -49,4 +51,37 @@ function getModals(opts){
         addFolderModal: opts.addFolderModal || 0,
         changeModal: opts.changeModal || 0
     };
+}
+
+
+/**
+* Intializes options for needed to render main.ejs
+*/
+function createOptions(opts){
+    var opts = opts || {};
+    return {
+        dd:       opts.dd      || filterOptions().dd,
+        bm:       opts.bm      || [],
+        folders : opts.folders || [],
+        modals:   opts.modals  || getModals()
+    }
+}
+
+/**
+* Template Loader for EJS
+*/
+function loadTemplate(name, data){
+    var template = require('../views/'+ name +'.ejs');
+    var rendered = template(data);
+    document.getElementById('bm-view').innerHTML = rendered;
+    return rendered;
+}
+
+
+/**
+* Main Template Loader for EJS
+*/
+
+function load(data){
+    return loadTemplate('main', createOptions(data))
 }
