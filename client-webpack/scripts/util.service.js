@@ -89,7 +89,24 @@ function load(data){
     addListeners();
 }
 
+
 function addListeners(){
+    document.getElementById("bm-search-form").addEventListener("submit", function(event){
+        event.preventDefault();
+        
+        var searchValue = document.getElementById("bm-search").value;
+       
+
+        path = '/v2/bm';
+        param = {
+            params: {
+              keyword: searchValue
+            }
+        };
+       
+        makeAxiosCall(path, param);
+    }); 
+
     document.getElementById("bm-search-button").addEventListener("click", function(event){
         event.preventDefault();
         
@@ -133,5 +150,4 @@ function makeAxiosCall(path, param){
     .catch(function (response) {
         console.log('Error', response);
     });
-
 }
