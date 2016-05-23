@@ -1,8 +1,10 @@
+var axios = require('axios'); 
 exports.filterOptions = filterOptions;
 exports.getModals = getModals;
 exports.createOptions = createOptions;
 exports.loadTemplate = loadTemplate;
 exports.load = load;
+
 function filterOptions(orderBy){
     var options = [{
         name: 'Most Recent',
@@ -83,5 +85,53 @@ function loadTemplate(name, data){
 */
 
 function load(data){
-    return loadTemplate('main', createOptions(data))
+    loadTemplate('main', createOptions(data))
+    addListeners();
+}
+
+function addListeners(){
+    document.getElementById("bm-search-button").addEventListener("click", function(event){
+        event.preventDefault();
+        
+        var searchValue = document.getElementById("bm-search").value;
+       
+
+        path = '/v2/bm';
+        param = {
+            params: {
+              keyword: searchValue
+            }
+        };
+       
+        makeAxiosCall(path, param);
+    }); 
+
+    document.getElementById("bm-filter-button").addEventListener("click", function(event){
+        event.preventDefault();
+        
+        var sortValue = document.getElementById("bm-sort").value;
+
+        path = '/v2/bm';
+        param = {
+            params: {
+              orderBy: sortValue
+            }
+        };
+        makeAxiosCall(path, param);
+    }); 
+
+
+}
+
+function makeAxiosCall(path, param){
+    axios.get(path, param)
+    .then(function (response) {
+        if(response.status == 200){
+            load(response.data);
+        }
+    })
+    .catch(function (response) {
+        console.log('Error', response);
+    });
+
 }

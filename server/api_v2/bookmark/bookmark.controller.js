@@ -22,12 +22,12 @@ controller.list = function(req, res) {
     var orderBy = req.query.orderBy || "";
     var keyword = req.query.keyword;
     var uid = req.user.id;
-
+    
     var options = filterOptions(orderBy);
 
     // Promise 1:
     var bookmarks = [];
-    var bm1 = Bookmark.find(keyword, uid, options.filter);
+    var bm1 = Bookmark.find(keyword, uid, options.filter.orderFilter);
 
     // Promise 2:
     var folders = {};
@@ -44,6 +44,7 @@ controller.list = function(req, res) {
             val.starCSS = util.starValToCss(val.star);
             folders[val.name].push(val)
         })
+
         var resData =  {
             dd: options.dd,
             bm: bookmarks,
@@ -55,7 +56,7 @@ controller.list = function(req, res) {
         // TODO:  res.render('index', resData);
         res.json(resData);
     }, function(reason) {
-        logger.error('[ bookmark.controller.js - Promise.all() ]', err);
+        logger.error('[ bookmark.controller.js - Promise.all() ]', reason);
         // TODO:  res.render()
         res.status(500).send(reason);
     }).catch(function(err){

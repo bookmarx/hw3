@@ -4,7 +4,9 @@ var axios = require('axios');  // Light Weight AJAX Library
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log('DOM Loaded.')
     loadApp();
+
 });
+
 
 
 function loadApp() {
@@ -19,4 +21,9 @@ function loadApp() {
     .catch(function (response) {
         console.log('Error', response);
     });
+
 }
+
+
+
+

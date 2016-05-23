@@ -41,6 +41,7 @@ function renderModalMiddleware(){
 
 
 function filterOptions(orderBy){
+    
     var options = [{
         name: 'Most Recent',
         value: 'MostRecent',
@@ -57,22 +58,28 @@ function filterOptions(orderBy){
         name: 'Alphabetical',
         value: 'Alphabetical',
         selected: '',
-        orderFilter: 'dateAdded ASC'
+        orderFilter: 'title ASC'
     },{
         name: 'Date',
         value: 'Date',
         selected: '',
-        orderFilter: 'title ASC'
+        orderFilter: 'dateAdded ASC'
     }];
-    var filter = 'title ASC';
-
-    for(var i = 0; i < options; i++){
+    var filter = {
+        name: 'Most Recent',
+        value: 'MostRecent',
+        selected: '',
+        orderFilter: 'bookmark_id DESC'
+    };
+    
+    for(var i = 0; i < 4; i++){
         if(options[i].value === orderBy){
             options[i].selected = 'selected';
             filter = options[i];
-            break;
+            
         }
     }
+
     return {
         dd : options,
         filter : filter
