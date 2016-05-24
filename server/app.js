@@ -21,7 +21,7 @@ app.use('/auth', require('./auth'));
 
 app.use('/', require('./api_v2/user'));
 
-app.use('/v1/bm', require('./api_v1/bookmark'));
+// app.use('/v1/bm', require('./api_v1/bookmark'));
 app.use('/v2/bm', require('./api_v2/bookmark'));
 app.use('/v2/folder', require('./api_v2/folder'));
 // Using http instead of app.listen because of possible deprecation

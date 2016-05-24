@@ -1,4 +1,4 @@
-var axios = require('axios');
+    var axios = require('axios');
 var Bookmark = {};
 var util = require('./util.service');
 
@@ -33,7 +33,7 @@ Bookmark.search = function(event){
     path = '/v2/bm';
     param = {
         params: {
-          keyword: searchValue
+            keyword: searchValue
         }
     };
     get(path, param);
@@ -44,7 +44,7 @@ Bookmark.filter = function(event){
     path = '/v2/bm';
     param = {
         params: {
-          orderBy: sortValue
+            orderBy: sortValue
         }
     };
     get(path, param);
@@ -55,13 +55,36 @@ Bookmark.openAddModal = function(){
         util.load(response.data)
     })
     .catch(function(response){
-    console.log('Error', response);
+        console.log('Error', response);
     });
 };
 
-Bookmark.add = function(){
+Bookmark.add = function(event){
+    var form = event.target.form;
 
-    axios.post(path, param)
+    var name = form['name-add'].value;
+    var address = form['address-add'].value;
+    var description = form['description-add'].value;
+    var keyword = form['keyword-add'].value;
+    var folders = form['folders'].value;
+
+    var re = new RegExp('(http:\/\/.*)|(https:\/\/.*)','i')
+
+    if(!re.test(address)){
+        return console.log('error')
+    }
+
+    event.preventDefault();
+
+    axios.post('/v2/bm/', {
+        title: name,
+        clear
+
+        url: address,
+        description: description,
+        keywords: keyword,
+        folders: folders
+    })
     .then(function (response) {
         if(response.status == 200){
             util.load(response.data);

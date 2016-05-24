@@ -22,7 +22,7 @@ controller.list = function(req, res) {
     var orderBy = req.query.orderBy || "";
     var keyword = req.query.keyword;
     var uid = req.user.id;
-    
+
     var options = filterOptions(orderBy);
 
     // Promise 1:
@@ -75,7 +75,7 @@ controller.insert = function(req, res){
     var keywords = db.escape(req.body.keywords);
     var folder_id = db.escape(req.body.folders);
 
-    if(req.body.title.length <= 0 ){
+    if(req.body.title && req.body.title.length <= 0 ){
         return res.renderModal({
             addModal: { errorMessage: 'Name cannot be blank!' }
         });
@@ -84,11 +84,11 @@ controller.insert = function(req, res){
     var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+user_id+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
     db.query(queryString, function(err){
         if(err){
-            return res.renderModal({
+            return res.status(500).send({
                 addModal: { errorMessage: err }
             });
         }
-        res.redirect('/v1/bm/');
+        res.status(201).send('Created.');
     });
 }
 

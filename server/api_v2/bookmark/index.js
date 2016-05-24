@@ -13,7 +13,7 @@ router.use(auth.isAuthenticated());
 
 router.get('/', controller.list);
 router.post('/edit/:bid(\\d+)', controller.update);
-router.post('/add/', controller.insert);// uid
+router.post('/', controller.insert);// uid
 router.post('/delete/:bid(\\d+)', controller.delete);
 router.get('/star/:bookmark_id', controller.star);
 
