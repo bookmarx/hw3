@@ -38,11 +38,43 @@ controller.show = function(req, res){};
 /**
 * update a folder
 */
-controller.update = function(req, res){};
+controller.update = function(req, res){
+    var fid = db.escape(req.body.id);
+    var name = db.escape(req.body.name);
+    var desc = db.escape(req.body.description);
+    var keyword = db.escape(req.body.keyword);
+
+    Folder.update({
+        name: name,
+        desc: desc,
+        keyword: keyword,
+        fid: fid
+    })
+    .then(function(data){
+
+    })
+    .catch(function(err){
+        console.log('Error', err);
+    })
+};
 
 /**
 * delete a folder
 */
-controller.delete = function(req, res){};
+controller.delete = function(req, res){
+    var fid = db.escape(req.body.id);
+    var uid = req.user.id;
+
+    Folder.remoe({
+      fid: fid,
+      uid: uid
+    })
+    .then(function(data){
+
+    })
+    .catch(function(err){
+        console.log('Error', err);
+    })
+};
 
 module.exports = controller;

@@ -32,7 +32,7 @@ model.insert = function(data){
 * remove a folder to db
 */
 model.remove = function(data){
-    var queryString = `DELETE from folders WHERE folder_id = ${data.id} AND user_id = ${data.uid}`;
+    var queryString = `DELETE from folders WHERE folder_id = ${data.fid} AND user_id = ${data.uid}`;
     return db.queryP(queryString);
 };
 
@@ -40,12 +40,10 @@ model.remove = function(data){
 * update a folder to db
 */
 model.update = function(data){
-    var queryString = `UPDATE bookmarks SET title = ${data.title},
-    url = ${data.url},
-    description = ${data.description},
-    keywords = ${data.keywords},
-    folder_id = ${data.folder_id }
-    WHERE bookmark_id =   ${data.bid}`;
+    var queryString = `UPDATE folders SET name = ${data.name},
+    description = ${data.desc},
+    keywords = ${data.keyword},
+    WHERE folder_id =   ${data.fid}`;
 
     return db.queryP(queryString);
 };

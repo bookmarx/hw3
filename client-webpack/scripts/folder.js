@@ -1,3 +1,4 @@
+var util = require('./util.service.js');
 var folders = {};
 
 function addListenerHelper(id, evt, cb){
@@ -18,8 +19,9 @@ folders.addListeners = function addListeners(cb){
     }
 
     // update
-    document.getElementById('bm-add-folder-btn')
-    .addEventListener('click', function(){
+    document.getElementById('bm-add-folder')
+    .addEventListener('click', function(event){
+        event.preventDefault();
         util.load({
             modals: {
                 addFolderModal: {
@@ -50,10 +52,19 @@ folders.addListeners = function addListeners(cb){
 
     //CANCEL button in addFolderModal
     addListenerHelper('bm-add-folder-cancel-btn', 'click', function(evt){
-      axios.get('/v2/folder'){
-        
-      }
+      axios.get('/v2/folder')
+      .then(function(response) {
+          if(response.status == 200){
+            util.load(response.data);
+          }
+      })
+      .catch(function (response){
+        console.log('Error', response);
+      })
     })
+
+    // Click the folder to edit or delete
+    var editBtns = document.getElementsByClassName('bm-folder');
 
     addListenerHelper('bm-edit-folder-save-btn', 'submit', function(event){
         event.preventDefault();
