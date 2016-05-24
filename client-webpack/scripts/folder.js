@@ -36,15 +36,37 @@ folders.saveFolder = function(event){
     var name = document.getElementById('name-folder').value;
     var description = document.getElementById('description-folder').value;
     var keyword = document.getElementById('keyword-folder').value;
-    path = '/v2/folder';
-    param = {
-        params: {
-            name: name,
-            description: description,
-            keyword: keyword,
-        }
-    };
-    post(path, param);
+
+    axios.post('/v2/folder', {
+      name: name,
+      description: description,
+      keyword: keyword,
+    })
+    .then(function(response) {
+
+    })
+    .catch(function(response) {
+      console.log('Error', response);
+    })
+}
+
+folders.updateFolder = function(event){
+    event.preventDefault();
+    var name = document.getElementById('name-edit-folder').value;
+    var description = document.getElementById('description-edit-folder').value;
+    var keyword = document.getElementById('keyword-edit-folder').value;
+
+    axios.put('/v2/folder', {
+      name: name,
+      description: description,
+      keyword: keyword,
+    })
+    .then(function(response) {
+
+    })
+    .catch(function(response) {
+      console.log('Error', response);
+    })
 }
 
 folders.openModal = function(){
@@ -57,6 +79,18 @@ folders.openModal = function(){
             }
         }
     })
+}
+
+folders.openEditFolderModal = function(){
+  util.load({
+      modals: {
+          editFolderModal: {
+              name: "Name",
+              description: "description",
+              keyword: "Keywords"
+          }
+      }
+  })
 }
 
 module.exports = folders;

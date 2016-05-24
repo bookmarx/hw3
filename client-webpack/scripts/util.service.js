@@ -53,6 +53,7 @@ function getModals(opts){
         editModal: opts.editModal || 0,
         deleteModal: opts.deleteModal || 0,
         addFolderModal: opts.addFolderModal || 0,
+        editFolderModal: opts.editFolderModal || 0,
         changeModal: opts.changeModal || 0
     };
 }

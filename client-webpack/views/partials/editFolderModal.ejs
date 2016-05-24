@@ -16,8 +16,8 @@
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="/v1/bm/" title="Close"  class="button" id="bm-edit-folder-cancel-btn">Cancel</a>
-                <button type="submit" class="button button-primary" id="bm-edit-folder-save-btn">Save</button>
+                <a href="/v1/bm/" title="Close"  class="button" onClick="bm.folder.closeModal()">Cancel</a>
+                <button type="submit" class="button button-primary" onClick="bm.folder.updateFolder()">Save</button>
 
             </footer>
         </form>

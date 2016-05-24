@@ -1,6 +1,6 @@
 <ul>
     <% for( var fname in folders ){ %>
-        <li class="bm-folder">
+        <li class="bm-folder" onClick="bm.folders.openEditFolderModal()">
             <i class="fa fa-folder" aria-hidden="true"></i> <%= fname %>
             <ul>
                 <% folders[fname].forEach(function(val, key){ %>
@@ -25,7 +25,7 @@
             <a href="<%= val.url %>"> <%= val.title %> </a>
             <span class="right">
                 <a href="/v1/bm/star/<%= val.bookmark_id %>"><i class="fa <%=val.starCSS %>" aria-hidden="true"></i></a>
-                <a href="/v1/bm/editForm/<%= val.bookmark_id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>            
+                <a href="/v1/bm/editForm/<%= val.bookmark_id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>
                 <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </span>
 
