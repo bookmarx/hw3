@@ -1,6 +1,3 @@
-
-var bookmark = require('./bookmark');
-
 exports.filterOptions = filterOptions;
 exports.getModals = getModals;
 exports.createOptions = createOptions;
@@ -68,7 +65,7 @@ function createOptions(opts){
         dd:       opts.dd      || filterOptions().dd,
         bm:       opts.bm      || [],
         folders : opts.folders || [],
-        modals:   opts.modals  || getModals()
+        modals:   getModals(opts.modals)
     }
 }
 
@@ -88,9 +85,5 @@ function loadTemplate(name, data){
 */
 function load(data){
     loadTemplate('main', createOptions(data));
-    addLoadListener(load);
-}
 
-function addLoadListener(load){
-    bookmark.addListeners(load);
 }

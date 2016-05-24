@@ -2,8 +2,8 @@
     <div class="bm-nav-top row">
         <h4 class="bm-title">Bookmarx</h4>
         <div class="right">
-            <a id="bm-add" href="#" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Bookmark"></a>
-            <a id="bm-add-folder" href="#" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal()"></a>
+            <a id="bm-add" href="#" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Bookmark" onClick="bm.bookmark.openAddModal(event)"></a>
+            <a id="bm-add-folder" href="#" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal(event)"></a>
             <a id="bm-change" href="#" class="button fa fa-cog fa-2x" aria-hidden="true" title="Change Password"></a>
             <a id="bm-logout" href="#" class="button fa fa-sign-out fa-2x" aria-hidden="true" title="Logout"></a>
         </div>
@@ -11,7 +11,7 @@
     <div class="bm-nav-bottom row">
         <form id="bm-search-form" action="#" method="GET">
             <input id="bm-search" type="text" name="keyword" placeholder="Search bookmarks">
-            <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" ></button>
+            <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" onClick="bm.bookmark.search(event)"></button>
         </form>
         <form action="#" method="GET">
             <select id="bm-sort" name="orderBy">
@@ -20,7 +20,7 @@
                 <% }); %>
 
             </select>
-            <button type="submit" id="bm-filter-button" class="button bm-icon-button fa fa-filter" ></button>
+            <button type="submit" id="bm-filter-button" class="button bm-icon-button fa fa-filter" onClick="bm.bookmark.filter(event)"></button>
         </form>
     </div>
 </nav>
