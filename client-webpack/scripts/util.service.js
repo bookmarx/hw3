@@ -64,7 +64,7 @@ function createOptions(opts){
         dd:       opts.dd      || filterOptions().dd,
         bm:       opts.bm      || [],
         folders : opts.folders || [],
-        modals:   opts.modals  || getModals()
+        modals:   getModals(opts.modals)
     }
 }
 

@@ -5,7 +5,35 @@ var controller = {};
 /**
 * list folders
 */
-controller.list = function(req, res){};
+controller.list = function(req, res){
+    var uid = req.user.id;
+
+    var folders = [{
+        name: 'None',
+        folder_id: -1
+    }];
+    Folder.list({ uid: uid })
+     .then(function(data){
+         data.forEach(function(val, key){
+             folders.push(val);
+         });
+
+         res.json({
+             folders: {},
+             dd: filterOptions(),
+             loggedIn: true,
+             bm :[],
+             modals :getModals({
+                 addModal : {
+                     folders: folders
+                 }
+             })
+         });
+     })
+     .catch(function(err){
+         res.status(500).send(err);
+     });
+};
 
 /**
 * create a folder
@@ -34,7 +62,9 @@ controller.create = function(req, res){
 /**
 * show a folder
 */
-controller.show = function(req, res){};
+controller.show = function(req, res) {
+
+};
 
 /**
 * update a folder
