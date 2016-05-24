@@ -19,7 +19,7 @@ router.use(auth.isAuthenticated());
 router.get('/', controller.list);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
-router.update('/:id', controller.update);
+router.put('/:id', controller.update);
 router.delete('/:id', controller.delete);
 
 module.exports = router;

@@ -1,5 +1,10 @@
-var Folder = require('folder.model.js');
+var Folder = require('./folder.model');
 var util = require('../util.service.js');
+
+var logger = util.logger;
+var getModals = util.getModals;
+var filterOptions = util.filterOptions;
+
 var controller = {};
 
 /**
@@ -20,7 +25,7 @@ controller.list = function(req, res){
 
          res.json({
              folders: {},
-             dd: filterOptions(),
+             dd: filterOptions().dd,
              loggedIn: true,
              bm :[],
              modals :getModals({
@@ -31,6 +36,7 @@ controller.list = function(req, res){
          });
      })
      .catch(function(err){
+         console.log(err)
          res.status(500).send(err);
      });
 };
