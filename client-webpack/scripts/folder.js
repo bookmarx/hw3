@@ -18,16 +18,57 @@ folders.addListeners = function addListeners(cb){
     }
 
     // update
-    addListenerHelper('.............', 'clicked', function(event){
+    document.getElementById('bm-add-folder-btn')
+    .addEventListener('click', function(){
+        util.load({
+            modals: {
+                addFolderModal: {
+                    name: "Name",
+                    description: "description",
+                    keyword: "Keywords"
+                }
+            }
+        })
+    });
+
+    // SAVE button in addFolderModal
+    addListenerHelper('bm-add-folder-save-btn', 'submit', function(event){
         event.preventDefault();
-        var searchValue = document.getElementById('.............').value;
+        var name = document.getElementById('name-folder').value;
+        var description = document.getElementById('description-folder').value;
+        var keyword = document.getElementById('keyword-folder').value;
         path = '/v2/folder';
         param = {
             params: {
-                keyword: searchValue
+              name: name,
+              description: description,
+              keyword: keyword
             }
         };
-        get(path, param);
+        post(path, param);
+    });
+
+    //CANCEL button in addFolderModal
+    addListenerHelper('bm-add-folder-cancel-btn', 'click', function(evt){
+      axios.get('/v2/folder'){
+        
+      }
+    })
+
+    addListenerHelper('bm-edit-folder-save-btn', 'submit', function(event){
+        event.preventDefault();
+        var name = document.getElementById('name-folder').value;
+        var description = document.getElementById('description-folder').value;
+        var keyword = document.getElementById('keyword-folder').value;
+        path = '/v2/folder';
+        param = {
+            params: {
+                name: name,
+                description: description,
+                keyword: keyword,
+            }
+        };
+        post(path, param);
     });
 }
 

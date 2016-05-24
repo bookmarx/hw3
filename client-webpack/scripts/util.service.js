@@ -1,6 +1,6 @@
 
 var bookmark = require('./bookmark');
-
+var folder = require('./folder');
 
 exports.filterOptions = filterOptions;
 exports.getModals = getModals;
@@ -93,4 +93,5 @@ function load(data){
 
 function addLoadListener(load){
     bookmark.addListeners(load);
+    folder.addListeners(load);
 }
