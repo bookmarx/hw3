@@ -36,15 +36,18 @@ folders.saveFolder = function(event){
     var name = document.getElementById('name-folder').value;
     var description = document.getElementById('description-folder').value;
     var keyword = document.getElementById('keyword-folder').value;
-    path = '/v2/folder';
-    param = {
-        params: {
-            name: name,
-            description: description,
-            keyword: keyword,
-        }
-    };
-    post(path, param);
+
+    axios.post('/v2/folder', {
+        name: name,
+        description: description,
+        keyword: keyword,
+    })
+    .then(function (response) {
+    
+    })
+    .catch(function (response) {
+        console.log('Error', response);
+    })
 }
 
 folders.openModal = function(){
