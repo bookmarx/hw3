@@ -1,5 +1,5 @@
 var Folder = require('folder.model.js');
-
+var util = require('../util.service.js');
 var controller = {};
 
 /**
@@ -26,8 +26,13 @@ controller.create = function(req, res){
         res.send('Folder Created.');
     })
     .catch(function(err){
-        res.status(400).send();
-        //Handle Error
+      if(res.status == 400){
+        util.load({
+          modals: {
+            addFolderModal: {errorMessage: "An error occured."}
+          }
+        })
+      }
     })
 };
 
@@ -55,7 +60,13 @@ controller.update = function(req, res){
 
     })
     .catch(function(err){
-        console.log('Error', err);
+      if(res.status == 400){
+        util.load({
+          modals: {
+            editFolderModal: {errorMessage: "An error occured."}
+          }
+        })
+      }
     })
 };
 
@@ -66,7 +77,7 @@ controller.delete = function(req, res){
     var fid = db.escape(req.body.id);
     var uid = req.user.id;
 
-    Folder.remoe({
+    Folder.remove({
       fid: fid,
       uid: uid
     })
@@ -74,7 +85,13 @@ controller.delete = function(req, res){
 
     })
     .catch(function(err){
-        console.log('Error', err);
+        if(res.status == 400){
+          util.load({
+            modals: {
+              editFolderModal: {errorMessage: "An error occured."}
+            }
+          })
+        }
     })
 };
 

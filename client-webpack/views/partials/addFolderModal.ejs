@@ -23,4 +23,7 @@
             </footer>
         </form>
     </section>
+    <% if(modals.addFolderModal.errorMessage) { %>
+	<p style="color: red;"><%= modals.addFolderModal.errorMessage %></p>
+   <% } %>
 </div>
