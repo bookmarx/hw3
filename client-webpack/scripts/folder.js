@@ -82,6 +82,7 @@ folders.openModal = function(){
 }
 
 folders.openEditFolderModal = function(){
+    console.log('hi');
   util.load({
       modals: {
           editFolderModal: {
