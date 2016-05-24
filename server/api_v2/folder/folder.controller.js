@@ -23,9 +23,10 @@ controller.create = function(req, res){
         uid: uid
     })
     .then(function(data){
-
+        res.send('Folder Created.');
     })
     .catch(function(err){
+        res.status(400).send();
         //Handle Error
     })
 };
