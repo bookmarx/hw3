@@ -29,6 +29,7 @@ Bookmark.list = function(){
 }
 
 Bookmark.search = function(event){
+    event.preventDefault();
     var searchValue = document.getElementById("bm-search").value;
     path = '/v2/bm';
     param = {
@@ -40,6 +41,7 @@ Bookmark.search = function(event){
 }
 
 Bookmark.filter = function(event){
+    event.preventDefault();
     var sortValue = document.getElementById("bm-sort").value;
     path = '/v2/bm';
     param = {
@@ -49,6 +51,7 @@ Bookmark.filter = function(event){
     };
     get(path, param);
 }
+
 Bookmark.openAddModal = function(){
     axios.get('/v2/folder')
     .then(function(response){
@@ -78,8 +81,6 @@ Bookmark.add = function(event){
 
     axios.post('/v2/bm/', {
         title: name,
-        clear
-
         url: address,
         description: description,
         keywords: keyword,

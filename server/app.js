@@ -24,6 +24,10 @@ app.use('/', require('./api_v2/user'));
 // app.use('/v1/bm', require('./api_v1/bookmark'));
 app.use('/v2/bm', require('./api_v2/bookmark'));
 app.use('/v2/folder', require('./api_v2/folder'));
+
+app.get('*', function(req, res) {
+    res.redirect('/app/');
+});
 // Using http instead of app.listen because of possible deprecation
 http.createServer(app).listen(config.port, function () {
     logger.info('Express server listening on %d, in %s mode', config.port, app.get('env'));
