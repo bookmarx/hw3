@@ -1,22 +1,10 @@
+
 var util = require('./util.service');
 var axios = require('axios');
 var folders = {};
 
 function addListenerHelper(id, evt, cb){
     document.getElementById(id).addEventListener(evt, cb)
-}
-
-// TODO: DELETE THIS METHOD
-folders.addListeners = function addListeners(load){
-    // SAVE button in addFolderModal
-    // addListenerHelper('bm-add-folder-save-btn', 'submit', function(event){
-    //     event.preventDefault();
-    //     var name = document.getElementById('name-folder').value;
-    //     var description = document.getElementById('description-folder').value;
-    //     var keyword = document.getElementById('keyword-folder').value;
-    //
-    //     // get('/v2/bm')
-    // });
 }
 
 folders.closeModal = function(){
@@ -43,13 +31,16 @@ folders.saveFolder = function(event){
       keyword: keyword,
     })
     .then(function(response) {
-
+        folders.closeModal();
     })
     .catch(function(response) {
       console.log('Error', response);
     })
 }
 
+/**
+* Update The Folder - Incomplete
+*/
 folders.updateFolder = function(event){
     event.preventDefault();
     var name = document.getElementById('name-edit-folder').value;
@@ -68,7 +59,9 @@ folders.updateFolder = function(event){
       console.log('Error', response);
     })
 }
-
+/**
+* Open the Edit Folder Modal - Incomplete
+*/
 folders.openModal = function(){
     util.load({
         modals: {
@@ -80,7 +73,9 @@ folders.openModal = function(){
         }
     })
 }
-
+/**
+* Update the Edit Folder Modal - Incomplete
+*/
 folders.openEditFolderModal = function(){
     console.log('hi');
     util.load({

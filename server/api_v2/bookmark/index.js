@@ -18,4 +18,7 @@ router.delete('/:bid(\\d+)', controller.delete);
 router.put('/star/:bid(\\d+)', controller.star);
 
 
+// Modal/Forms
+router.get('/editForm/:bid(\\d+)', controller.updateForm);
+
 module.exports = router;

@@ -36,3 +36,8 @@ function find(keyword, uid, orderBy){
     var queryString = `SELECT * FROM bookmarks ${where(keyword, uid)} AND bookmarks.folder_id < 1 ORDER BY ${orderBy}`;
     return db.queryP(queryString);
 }
+
+function findOne(data){
+    var queryString = `SELECT * FROM bookmarks WHERE bookmarks.bookmark_id =  ${data.bid} AND bookmarks.user_id = ${data.uid}`;
+    return db.queryP(queryString);
+}

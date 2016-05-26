@@ -88,14 +88,14 @@ controller.changePassword = function(req, res){
     var reNewPass = req.body.reNewPassword;
 
     if(!newPass || !reNewPass){
-        return res.renderModal({
+        return res.status(400).send({
             changeModal: { errorMessage: 'Password field(s) cannot be blank!' }
         });
 
     }
 
     if(newPass !== reNewPass){
-        return res.renderModal({
+        return res.status(400).send({
             changeModal: { errorMessage: 'Password fields do not match!' }
         });
     }
@@ -106,16 +106,16 @@ controller.changePassword = function(req, res){
         var queryString = `UPDATE users SET hashedPassword = '${hashedPassword}', salt = '${salt}'  WHERE username = '${req.user.username}'`;
         db.query(queryString, function(err){
             if (err && err.code === 'ER_DUP_ENTRY') {
-                return res.renderModal({ changeModal: { errorMessage: 'That email already exists!' } });
+                return res.status(400).send({ changeModal: { errorMessage: 'That email already exists!' } });
             } else if (err) {
                 console.log('update error', err)
-                return res.renderModal({ changeModal: { errorMessage: 'Sign up failed try again!'  } });
+                return res.status(400).send({ changeModal: { errorMessage: 'Sign up failed try again!'  } });
             }
-            res.redirect('/v2/bm/');
+            res.send('Updated');
         });
 
     } else {
-        return res.renderModal({
+        return res.status(400).send({
             changeModal: { errorMessage: 'Your old password is invalid!' }
         });
     }

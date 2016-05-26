@@ -4,6 +4,7 @@ var db = require('../../db');
 var controller = {};
 
 var Bookmark = require('./bookmark.model');
+var Folder = require('../folder/folder.model');
 
 var util = require('../util.service');
 
@@ -22,6 +23,11 @@ controller.list = function(req, res) {
     var orderBy = req.query.orderBy || "";
     var keyword = req.query.keyword;
     var uid = req.user.id;
+
+    var download = req.query.download;
+    if(download === 'true'){
+        res.attachment('export.json');
+    }
 
     var options = filterOptions(orderBy);
 
@@ -100,9 +106,6 @@ controller.update = function(req, res){
     var description = db.escape(req.body.description);
     var keywords = db.escape(req.body.keywords);
     var folder_id = db.escape(req.body.folders);
-    // if(url.substring(0,6) != "http://"){
-    //     url = "http://" + url;
-    // }
 
     var queryString = 'UPDATE bookmarks SET title = ' + title +
     ', url = ' + url +
@@ -110,9 +113,10 @@ controller.update = function(req, res){
     ', keywords = ' + keywords+
     ', folder_id = ' + folder_id +
     ' WHERE bookmark_id = ' + bid;
-    db.query(queryString, function(err){
-        // if (err) throw err;
-        res.redirect('/v1/bm/');
+    db.queryP(queryString).then(function(data){
+        res.json(data);
+    }).catch(function(err){
+        res.status(500).send(err);
     });
 };
 
@@ -141,13 +145,56 @@ controller.delete = function(req, res) {
 */
 
 controller.star = function(req, res){
-    var id  = req.params.bookmark_id;
-    db.query('UPDATE bookmarks SET star = !star WHERE bookmark_id = ' + id, function(err){
-        // if(err) throw err;
-        res.redirect('/v1/bm/');
-    })
+    var uid = db.escape(req.user.id);
+    var bid  = db.escape(req.params.bid);
+    console.log(`star | ${uid} | ${bid}`)
+    var queryString = `UPDATE bookmarks SET star = !star WHERE bookmarks.bookmark_id = ${bid} and bookmarks.user_id = ${uid}`;
+
+    db.queryP(queryString).then(function(data){
+        res.json(data);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
 }
 
+//===================================================
+// Modals/Forms
+//===================================================
+
+controller.updateForm = function(req, res) {
+    var uid = req.user.id;
+    var bid = db.escape(req.params.bookmark_id);
+
+    var folders = [{
+        name: 'None',
+        folder_id: -1
+    }];
+
+    var f1 = Folder.list({ uid: uid });
+    var f1 = Bookmark.findOne({
+        bid: bid,
+        uid: uid
+    });
+
+
+    Promise.all(function(arr){
+        arr[0].forEach(function(val, key){
+            folders.push(val);
+        });
+    }).then(function(data){
+        getModals({
+            editModal : {
+                bm: bookmarks[0],
+                folders: folders
+            }
+        })
+    })
+
+
+
+
+
+};
 
 
 module.exports = controller;

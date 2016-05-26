@@ -25,15 +25,7 @@ controller.list = function(req, res){
          });
 
          res.json({
-             folders: {},
-             dd: filterOptions().dd,
-             loggedIn: true,
-             bm :[],
-             modals :getModals({
-                 addModal : {
-                     folders: folders
-                 }
-             })
+             folders: folders
          });
      })
      .catch(function(err){

@@ -60,7 +60,13 @@ Bookmark.filter = function(event){
 Bookmark.openAddModal = function(){
     axios.get('/v2/folder')
     .then(function(response){
-        util.load(response.data);
+        util.load({
+            modals: {
+                addModal: {
+                    folders: response.data.folders
+                }
+            }
+        });
     })
     .catch(function(response){
         console.log('Error', response);
@@ -140,24 +146,50 @@ Bookmark.delete = function(event, bookmarkId){
 /**
 * Open edit bookmark form
 */
-Bookmark.openEditModal = function(event, bookmarkId){
+Bookmark.openEditModal = function(event){
+    var bm = JSON.parse(event.target.parentNode.parentNode.dataset.bm);
     event.preventDefault();
-    //TODO
-    util.load({
-        modals: {
-            editModal: {}
-        }
+
+
+    axios.get('/v2/folder/')
+    .then(function(response){
+        util.load({
+            modals: {
+                editModal: {
+                    folders: response.data.folders,
+                    bm: bm
+                }
+            }
+        });
     })
+    .catch(function(response){
+        console.log('Error', response);
+    });
 };
 
 /**
 * Edit bookmark
 */
-Bookmark.edit = function(bookmarkId){
+Bookmark.edit = function(event){
     event.preventDefault();
+    var form = event.target;
+
+    var bid = form.dataset.bmId;
+
+    var name = form['name-edit'].value;
+    var address = form['address-edit'].value;
+    var description = form['description-edit'].value;
+    var keyword = form['keyword-edit'].value;
+    var folders = form['folders'].value;
+
+
     //TODO
-    axios.put('/v2/bm/', {
-        title: name
+    axios.put('/v2/bm/'+bid, {
+        title: name,
+        url: address,
+        description: description,
+        keywords: keyword,
+        folders: folders
     })
     .then(function (response) {
         if(response.status == 201 || response.status == 200 ){
@@ -172,11 +204,12 @@ Bookmark.edit = function(bookmarkId){
 /**
 * Star bookmark
 */
-Bookmark.star = function(event, bookmarkId){
+Bookmark.star = function(event){
     event.preventDefault();
-    axios.put('/v2/bm/star', {
-        title: name
-    })
+
+    var bm = JSON.parse(event.target.parentNode.parentNode.dataset.bm);
+
+    axios.put('/v2/bm/star/'+bm.bookmark_id)
     .then(function (response) {
         if(response.status == 201 || response.status == 200 ){
             Bookmark.list();
@@ -186,6 +219,46 @@ Bookmark.star = function(event, bookmarkId){
         util.handleError(response);
     });
 };
+
+Bookmark.openChangeModal = function(){
+    util.load({
+        modals: {
+            changeModal: {}
+        }
+    })
+}
+
+Bookmark.change = function(){
+    var user = event.target;
+console.log(user);
+
+    event.preventDefault();
+
+    var oldPass = user['oldPassword'].value;
+    var newPass = user['newPassword'].value;
+    var reNewPass = user['reNewPassword'].value;
+
+    axios.post('/change/', {
+        oldPassword: oldPass,
+        newPassword: newPass,
+        reNewPassword: reNewPass
+    })
+    .then(function (response) {
+        if(response.status == 201 || response.status == 200 ){
+            Bookmark.list();
+        }
+    })
+    .catch(function (response) {
+        console.log(response.data)
+        if(response.status === 400) {
+            util.load({
+                modals: response.data
+            })
+        } else {
+            handleError(response);
+        }
+    });
+}
 
 
 
