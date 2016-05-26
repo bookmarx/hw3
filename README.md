@@ -1,4 +1,4 @@
-# hw3
+# HW5 - Phase 3
 
 [ ![Codeship Status for bookmarx/hw3](https://codeship.com/projects/30b9c5e0-029a-0134-086d-663251dd2b3e/status?branch=master)](https://codeship.com/projects/153629)
 
@@ -6,6 +6,8 @@
 Phase 1 branch: master-phase-1
 
 Phase 2 branch: master-phase-2
+
+Phase 3 branch: master/ master-phase-3
 
 App Structure
 ```
