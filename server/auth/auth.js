@@ -14,18 +14,19 @@ function isAuthenticated() {
     return compose()
     // Validate jwt
     .use(function(req, res, next) {
-        // console.log('isAuth',req.cookies)
+        console.log('isAuth',req.cookies)
         // allow access_token to be passed through query parameter as well
         if(req.cookies && req.cookies.bm_token) {
             req.headers.authorization = 'Bearer ' + req.cookies.bm_token;
             // console.log('header',req.headers.authorization)
         } else {
-            res.render('login', {errorMessage: 'You must login to view that page! [1]'});
+            // res.render('login', {errorMessage: 'You must login to view that page! [1]'});
+            return res.status(403).send('UnauthorizedError: No authorization token was found');
         }
         try {
             validateJwt(req, res, next);
         } catch (e) {
-            res.render('login', {errorMessage: 'You must login to view that page! [2]'});
+            return res.status(403).send('UnauthorizedError: Authorization token was not found valid.');
         }
     })
     // Attach user to request
@@ -35,7 +36,9 @@ function isAuthenticated() {
 
         mysql.query(`SELECT * from users WHERE username = "${uname.toLowerCase()}" LIMIT 1`,
         function(err, users) {
-            if (err) return next(err);
+            if (err) {
+                return next(err);
+            }
             if (!users) {
                 return res.render('login', {
                     errorMessage: 'You must login to view that page! [2]'

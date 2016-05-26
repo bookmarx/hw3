@@ -1,32 +1,49 @@
 <ul>
     <% for( var fname in folders ){ %>
-        <li class="bm-folder">
+        <li class="bm-folder" >
             <i class="fa fa-folder" aria-hidden="true"></i> <%= fname %>
+            <span class="right" style="padding-right:15px" onClick="bm.folder.openEditFolderModal()">
+              <!--  <a href="#"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+            </span>
             <ul>
                 <% folders[fname].forEach(function(val, key){ %>
                     <% if( val.bookmark_id ){ %>
                         <li>
                             <a href="<%= val.url %>"> <%= val.title %> </a>
-                            <span class="right">
-                                <a href="/v1/bm/editForm/<%= val.bookmark_id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                <a href="/v1/bm/star/<%= val.bookmark_id %>"><i class="fa <%=val.starCSS %>" aria-hidden="true"></i></a>
-                                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <span class="right" data-bm="<%= JSON.stringify(val) %>">
+                                <a href="/v1/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
+                                    <i class="fa <%=val.starCSS %>" aria-hidden="true"></i>
+                                </a>
+                                <a href="/v1/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </a>
+                                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
                             </span>
 
                         </li>
                     <% } %>
                 <% }); %>
             </ul>
+
         </li>
     <% }; %>
 
     <% bm.forEach(function(val, key){ %>
         <li>
             <a href="<%= val.url %>"> <%= val.title %> </a>
-            <span class="right">
-                <a href="/v1/bm/editForm/<%= val.bookmark_id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                <a href="/v1/bm/star/<%= val.bookmark_id %>"><i class="fa <%=val.starCSS %>" aria-hidden="true"></i></a>
-                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <span class="right" data-bm="<%= JSON.stringify(val) %>">
+                <a href="/v1/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
+                    <i class="fa <%=val.starCSS %>" aria-hidden="true"></i>
+                </a>
+                <a href="/v1/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </a>
+                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
             </span>
 
         </li>

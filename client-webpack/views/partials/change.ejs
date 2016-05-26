@@ -1,6 +1,6 @@
 <div id="changeModal" class="modal-dialog">
     <section>
-        <form action="/v1/change/" method="POST">
+        <form action="/v1/change/" method="POST" onsubmit="bm.bookmark.change(event)">
             <header class="modal-header dark-primary-color">
                 <h2>Change Password</h2>
             </header>
@@ -22,7 +22,7 @@
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="/v1/bm/" title="Close" class="button">Cancel</a>
+                <a href="/v1/bm/" title="Close" class="button" onClick="bm.bookmark.list()">Cancel</a>
                 <button input="submit" class="button button-primary">Save</button>
 
             </footer>

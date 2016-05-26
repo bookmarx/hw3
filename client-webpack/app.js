@@ -1,21 +1,22 @@
-var util = require('./scripts/util.service.js');
+var util = require('./scripts/util.service.js'); // Custom Utils
+var axios = require('axios');  // Light Weight AJAX Library
+var folder = require('./scripts/folder.js');
+var bookmark = require('./scripts/bookmark.js');
 
-function loadTemplate(name, data){
-    var template = require('./views/'+ name +'.ejs');
-    return template(data);
+require("./style/skeleton/css/normalize.css");
+require("./style/skeleton/css/skeleton.css");
+require("./style/main.css");
+require("./style/modal.css");
+require("font-awesome-webpack");
+
+window.bm = {
+    'load': loadApp,
+    'folder': folder,
+    'bookmark': bookmark
 }
 
-var options = util.filterOptions();
-var getModals = util.getModals;
-
-var opts = {
-    dd: options.dd,
-    bm: [],
-    folders : [],
-    loggedIn: true,
-    modals: getModals()
+function loadApp() {
+    console.log('App Loaded');
+    // Request the intial list data
+    bookmark.list();
 }
-
-var tpl = loadTemplate('main', opts);
-
-document.write(tpl);

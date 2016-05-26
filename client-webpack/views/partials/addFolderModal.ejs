@@ -7,19 +7,23 @@
             </header>
             <div class="modal-body">
                 <label for="name-folder">Name</label>
-                <input type="text" name="name" placeholder="Name" id="name-folder">
+                <input type="text" name="name" placeholder="Name" id="name-folder" required>
                 <label for="description-folder">Description</label>
                 <textarea name="description" placeholder="Description" id="description-folder"></textarea>
                 <label for="keyword-folder">Keyword</label>
                 <input type="text" name="keyword" placeholder="Keyword" id="keyword-folder">
+                <% if(modals.addFolderModal.errorMessage) { %>
+                <p style="color: red;"><%= modals.addFolderModal.errorMessage %></p>
+               <% } %>
             </div>
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="/v1/bm/" title="Close" class="button">Cancel</a>
-                <button type="submit" class="button button-primary">Save</button>
 
+                <a title="Close" class="button" onClick="bm.bookmark.list()">Cancel</a>
+                <button type="submit" class="button button-primary" onClick="bm.folder.saveFolder(event)">Save</button>
             </footer>
         </form>
     </section>
+
 </div>

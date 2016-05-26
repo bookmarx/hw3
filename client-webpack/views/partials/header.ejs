@@ -2,25 +2,32 @@
     <div class="bm-nav-top row">
         <h4 class="bm-title">Bookmarx</h4>
         <div class="right">
-            <a href="/v1/bm/addForm" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Form"></a>
-            <a href="/v1/bm/addFolderForm" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder"></a>
-            <a href="/v1/change" class="button fa fa-cog fa-2x" aria-hidden="true" title="Change Password"></a>
-            <a href="/v1/logout" class="button fa fa-sign-out fa-2x" aria-hidden="true" title="Logout"></a>
+            <a id="bm-add" href="#" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Bookmark" onClick="bm.bookmark.openAddModal(event)"></a>
+            <a id="bm-add-folder" href="#" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal(event)"></a>
+            <div class="dropdown">
+                <a class="button fa fa-cog fa-2x"></a>
+                <div class="dropdown-content">
+                    <a class="button button-primary"><i class="fa fa-upload"></i>  Import</a>
+                    <a class="button button-primary" href="/v2/bm?download=true"><i class="fa fa-download" download></i> Export</a>
+                    <a class="button button-primary" href="#" class="" onClick="bm.bookmark.openChangeModal(event)"><i class="fa fa-key"></i> Change Password</a>
+                    <a class="button button-primary" href="/logout" class="" title="Logout"><i class="fa fa-sign-out"></i>  Logout</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="bm-nav-bottom row">
-        <form action="/v1/bm/" method="GET">
-            <input id="bm-search" type="text" name="keyword" placeholder="Search bookmarks">
-            <button type="submit" class="button sb-button-submit fa fa-search" ></button>
+        <form id="bm-search-form" action="#" method="GET">
+            <input id="bm-search" type="text" name="keyword" onKeyDown="if(event.keyCode==13) bm.bookmark.search(event);" placeholder="Search bookmarks">
+            <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" onClick="bm.bookmark.search(event)"></button>
         </form>
-        <form action="/v1/bm/" method="GET">
+        <form action="#" method="GET">
             <select id="bm-sort" name="orderBy">
                 <% dd.forEach(function(val, key){%>
                     <option value="<%= val.value %>" <%= val.selected %>><%= val.name %></option>
                 <% }); %>
 
             </select>
-            <button type="submit" class="button bm-icon-button fa fa-filter" ></button>
+            <button type="submit" id="bm-filter-button" class="button bm-icon-button fa fa-filter" onClick="bm.bookmark.filter(event)"></button>
         </form>
     </div>
 </nav>
