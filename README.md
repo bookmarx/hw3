@@ -7,7 +7,7 @@ Phase 1 branch: master-phase-1
 
 Phase 2 branch: master-phase-2
 
-Phase 3 branch: master/ master-phase-3
+Phase 3 branch: master/master-phase-3
 
 App Structure
 ```
