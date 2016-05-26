@@ -34,7 +34,16 @@ folders.saveFolder = function(event){
         folders.closeModal();
     })
     .catch(function(response) {
-      console.log('Error', response);
+        util.load({
+            modals: {
+                addFolderModal: {
+                    name: "Name",
+                    description: "description",
+                    keyword: "Keywords",
+                    errorMessage: "You must enter a name!"
+                }
+            }
+        })
     })
 }
 
