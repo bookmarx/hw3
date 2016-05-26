@@ -2,3 +2,8 @@ node_modules/
 npm-debug.log
 .gulp-cache
 client/app/bundle.js
+client/app/*.ttf
+client/app/*.eot
+client/app/*.svg
+client/app/*.woff
+client/app/*.woff2

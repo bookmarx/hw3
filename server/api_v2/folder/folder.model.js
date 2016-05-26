@@ -21,10 +21,19 @@ model.list = function find(data){
 
 /**
 * add a folder to db
+* @param data.name {string} - Must be length > 0
 */
 model.insert = function(data){
+    var re = new RegExp('\'.+\'')
+    console.log('data.name', data.name)
+    if(!re.test(data.name)){
+        return Promise.reject('name must a lengh of 1 or greator');
+    }
+
+
     var queryString = `INSERT INTO folders (name, description, keyword, user_id)
     VALUES ( ${data.name}, ${data.desc}, ${data.keyword}, ${data.uid})`;
+
     return db.queryP(queryString);
 };
 

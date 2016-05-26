@@ -76,7 +76,7 @@ controller.insert = function(req, res){
     var folder_id = db.escape(req.body.folders);
 
     if(req.body.title && req.body.title.length <= 0 ){
-        return res.renderModal({
+        return res.status(400).send({
             addModal: { errorMessage: 'Name cannot be blank!' }
         });
     }
@@ -124,10 +124,13 @@ controller.update = function(req, res){
 * Does a redirect to the list page
 */
 controller.delete = function(req, res) {
-    var bid = req.params.bid;
-    db.query('DELETE from bookmarks where bookmark_id = ' + bid, function(err){
-        // if (err) throw err;
-        res.redirect('/v1/bm/');
+    var uid = db.escape(req.user.id);
+    var bid = db.escape(req.params.bid);
+    db.query(`DELETE from bookmarks where bookmark_id = ${bid} and user_id = ${uid}`, function(err){
+        if (err){
+            res.status(500).send();
+        };
+        res.status(204).send();
     });
 };
 

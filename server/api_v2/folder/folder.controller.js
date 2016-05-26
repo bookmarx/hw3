@@ -1,5 +1,6 @@
 var Folder = require('./folder.model');
 var util = require('../util.service.js');
+var db = require('../../db');
 
 var logger = util.logger;
 var getModals = util.getModals;
@@ -57,16 +58,15 @@ controller.create = function(req, res){
         uid: uid
     })
     .then(function(data){
-        res.send('Folder Created.');
+        res.json(data);
     })
     .catch(function(err){
-      if(res.status == 400){
-        util.load({
-          modals: {
-            addFolderModal: {errorMessage: "An error occured."}
-          }
+        logger.error('Folder.insert() -> ', err)
+        res.status(400).json({
+            modals: {
+                addFolderModal: {errorMessage: "An error occured."}
+            }
         })
-      }
     })
 };
 

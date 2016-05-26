@@ -3,6 +3,7 @@ exports.getModals = getModals;
 exports.createOptions = createOptions;
 exports.loadTemplate = loadTemplate;
 exports.load = load;
+exports.handleError = handleError;
 
 function filterOptions(orderBy){
     var options = [{
@@ -86,4 +87,14 @@ function loadTemplate(name, data){
 function load(data){
     loadTemplate('main', createOptions(data));
 
+}
+
+/**
+* Handle Errors
+*/
+function handleError(res, statusCode){
+    console.log('handleError:', res.data);
+    if(res.status === 403 || res.status === statusCode){
+        window.location.replace('/');
+    }
 }

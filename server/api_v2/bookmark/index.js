@@ -12,10 +12,10 @@ router.use(util.renderModalMiddleware())
 router.use(auth.isAuthenticated());
 
 router.get('/', controller.list);
-router.post('/edit/:bid(\\d+)', controller.update);
+router.put('/:bid(\\d+)', controller.update);
 router.post('/', controller.insert);// uid
-router.post('/delete/:bid(\\d+)', controller.delete);
-router.get('/star/:bookmark_id', controller.star);
+router.delete('/:bid(\\d+)', controller.delete);
+router.put('/star/:bid(\\d+)', controller.star);
 
 
 module.exports = router;

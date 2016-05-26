@@ -3,18 +3,20 @@ var axios = require('axios');  // Light Weight AJAX Library
 var folder = require('./scripts/folder.js');
 var bookmark = require('./scripts/bookmark.js');
 
+require("./style/skeleton/css/normalize.css");
+require("./style/skeleton/css/skeleton.css");
+require("./style/main.css");
+require("./style/modal.css");
+require("font-awesome-webpack");
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log('DOM Loaded.');
-    loadApp();
-    window.bm = {
-        'folder': folder,
-        'bookmark': bookmark
-    }
-});
-
+window.bm = {
+    'load': loadApp,
+    'folder': folder,
+    'bookmark': bookmark
+}
 
 function loadApp() {
+    console.log('App Loaded');
     // Request the intial list data
     bookmark.list();
 }
