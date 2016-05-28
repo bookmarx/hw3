@@ -128,7 +128,7 @@ controller.reset = function(req, res){
         reNewPass: reNewPass
     },function(err, data){
         if(err){
-            res.render('reset', { errorMessage : err.msg });
+            return res.render('reset', { errorMessage : err.msg });
         }
         var token = auth.signToken(req.user.id, req.user.username);
         res.cookie('bm_token', token, { expires: new Date(Date.now() + 900000), httpOnly: true });
@@ -161,11 +161,12 @@ controller.forgotForm = function(req, res){
 }
 
 controller.resetForm = function(req, res){
-    var userId = req.user.user_id;
+    console.log('req.user', req.params.resid)
+    // var userId = req.user.user_id;
 
     // Generate a new token to send reset request
-    var token = auth.signToken(req.user.id, req.user.username);
-    res.cookie('bm_token', token, { expires: new Date(Date.now() + 900000), httpOnly: true });
+    // var token = auth.signToken(req.user.id, req.user.username);
+    res.cookie('bm_token', req.params.resid, { expires: new Date(Date.now() + 1000*60*5), httpOnly: true });
 
     res.render('reset', { errorMessage : '' });
 }

@@ -8,7 +8,6 @@ var util = require('../util.service');
 var router = express.Router();
 
 
-
 router.use(util.renderModalMiddleware())
 
 router.get('/', controller.loginForm);

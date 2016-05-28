@@ -55,11 +55,11 @@ function isAuthenticated() {
 /**
 * Returns a jwt token signed by the app secret
 */
-function signToken(id, username) {
+function signToken(id, username, expireTime) {
     return jwt.sign({
         id: id,
         username: username
-    }, config.secrets.session, { expiresIn: 1000 * 60 * 60 * 5 });
+    }, config.secrets.session, { expiresIn: expireTime || 60 * 60 * 2 });
 }
 
 /**

@@ -28,6 +28,12 @@ app.use('/v2/folder', require('./api_v2/folder'));
 app.get('*', function(req, res) {
     res.redirect('/app/');
 });
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.render('login', {errorMessage: 'Your session has expired!'});
+});
+
 // Using http instead of app.listen because of possible deprecation
 http.createServer(app).listen(config.port, function () {
     logger.info('Express server listening on %d, in %s mode', config.port, app.get('env'));
