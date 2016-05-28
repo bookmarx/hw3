@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Bookmarx</title>
+    <script src="/app/bundle.js"></script>
+</head>
+<body style="margin-left: 0px" >
+        <div class="bm-container dark-primary-color ">
+            <form class="bm-user" action="/reset" method="POST" enctype="application/x-www-form-urlencoded">
+                <h4 class="bm-title"><a href="/">Bookmarx</a></h4>
+                <h5 class="">Reset password</h5>
+                <label for="keyword-add">New Password</label>
+                <input class="u-full-width" type="password" placeholder="new password" name="newPassword">
+                <label>Retype New Password</label>
+                <input class="u-full-width" type="password" placeholder="retype" name="reNewPassword"><br>
+                <button class="button" style="background-color: white;">Reset</button>
+            </form>
+            <p style="color: white; padding: 15px; font-size: 20px"><%= errorMessage %></p>
+        </div>
+</body>
+</html>
