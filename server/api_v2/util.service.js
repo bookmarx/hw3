@@ -10,7 +10,7 @@ exports.renderModalMiddleware = renderModalMiddleware;
 exports.filterOptions = filterOptions;
 exports.queryP = queryP;
 exports.starValToCss = starValToCss;
-
+exports.db = db;
 /* Defintion
 ---------------------------------------------------------------*/
 function getModals(opts){
@@ -41,7 +41,7 @@ function renderModalMiddleware(){
 
 
 function filterOptions(orderBy){
-    
+
     var options = [{
         name: 'Most Recent',
         value: 'MostRecent',
@@ -71,12 +71,12 @@ function filterOptions(orderBy){
         selected: '',
         orderFilter: 'bookmark_id DESC'
     };
-    
+
     for(var i = 0; i < 4; i++){
         if(options[i].value === orderBy){
             options[i].selected = 'selected';
             filter = options[i];
-            
+
         }
     }
 

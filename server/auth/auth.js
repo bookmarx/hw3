@@ -14,10 +14,12 @@ function isAuthenticated() {
     return compose()
     // Validate jwt
     .use(function(req, res, next) {
-        console.log('isAuth',req.cookies)
+        // console.log('isAuth',req)
         // allow access_token to be passed through query parameter as well
-        if(req.cookies && req.cookies.bm_token) {
-            req.headers.authorization = 'Bearer ' + req.cookies.bm_token;
+        var token = req.cookies.bm_token || req.params.resid;
+        console.log(token)
+        if(token) {
+            req.headers.authorization = 'Bearer ' + token;
             // console.log('header',req.headers.authorization)
         } else {
             // res.render('login', {errorMessage: 'You must login to view that page! [1]'});
@@ -41,7 +43,7 @@ function isAuthenticated() {
             }
             if (!users) {
                 return res.render('login', {
-                    errorMessage: 'You must login to view that page! [2]'
+                    errorMessage: 'You must login and/or your session has expired.'
                 });
             }
             req.user = users[0];

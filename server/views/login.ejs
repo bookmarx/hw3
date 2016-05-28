@@ -8,35 +8,19 @@
 </head>
 <body style="margin-left: 0px">
         <div class="bm-container dark-primary-color ">
-            <form class="bm-login" action="/login" method="POST" enctype="application/x-www-form-urlencoded">
-                <!-- <div class="row">
-                    <div class="six columns">
-                        <label for="exampleEmailInput">Your email</label>
-                        <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
-                    </div>
-                    <div class="six columns">
-                        <label for="exampleRecipientInput">Reason for contacting</label>
-                        <select class="u-full-width" id="exampleRecipientInput">
-                            <option value="Option 1">Questions</option>
-                            <option value="Option 2">Admiration</option>
-                            <option value="Option 3">Can I get your number?</option>
-                        </select>
-                    </div>
-                </div> -->
-                <h4 class="bm-title">Bookmarx</h4>
+            <form class="bm-user" action="/login" method="POST" enctype="application/x-www-form-urlencoded">
+                <h4 class="bm-title"><a href="/">Bookmarx</a></h4>
                 <h5 class="">Login</h5>
                 <label for="email">Email</label>
                 <input class="u-full-width" type="email" placeholder="test@mailbox.com" name="email" id="email">
                 <label for="password">Password</label>
                 <input class="u-full-width" type="password" placeholder="Password" name="password" id="password">
+                <br>
                 <input class="button-primary" type="submit" value="Login">
                 <a class="button" style="background-color: white;" href="/signup">Sign Up</a>
-                <!-- <a class="text-primary-color" href="/v1/change">Forget password?</a> -->
+                <a class="text-primary-color" href="/forgot">Forgot password?</a>
             </form>
             <p style="color: white; padding: 15px; font-size: 20px"><%= errorMessage %></p>
-        </div>
-        <div class="bm-view">
-            <!-- <iframe src="http://www.pint.com/"></iframe> -->
         </div>
 </body>
 </html>

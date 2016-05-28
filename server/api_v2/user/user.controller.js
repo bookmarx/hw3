@@ -2,7 +2,7 @@ var passport = require('passport');
 
 var auth = require('../../auth/auth');
 var db = require('../../db');
-var model = require('./user.model')
+var User = require('./user.model')
 var controller = {};
 
 var util = require('../util.service');
@@ -10,6 +10,7 @@ var util = require('../util.service');
 var getModals = util.getModals;
 var filterOptions = util.filterOptions;
 
+var compose = require('composable-middleware')
 
 controller.loginForm = function(req, res){
     res.render('login', { errorMessage: ''})
@@ -54,8 +55,8 @@ controller.signup = function(req, res){
         return res.render('signup', { errorMessage: 'Username or Password cannot be blank!' });
     }
 
-    var salt = model.makeSalt();
-    var hashedPassword = model.encryptPassword(password, salt);
+    var salt = User.makeSalt();
+    var hashedPassword = User.encryptPassword(password, salt);
 
     // console.log(`signup ${username} | ${password} | ${salt} | ${hashedPassword}`)
     var queryString = `INSERT INTO users (username, hashedPassword, salt) VALUES ( ${username}, '${hashedPassword}', '${salt}' )`;
@@ -82,43 +83,22 @@ controller.logout = function(req, res){
 }
 
 controller.changePassword = function(req, res){
-    var userId = req.user.user_id;
+    var user = req.user;
     var oldPass = req.body.oldPassword;
     var newPass = req.body.newPassword;
     var reNewPass = req.body.reNewPassword;
 
-    if(!newPass || !reNewPass){
-        return res.status(400).send({
-            changeModal: { errorMessage: 'Password field(s) cannot be blank!' }
-        });
-
-    }
-
-    if(newPass !== reNewPass){
-        return res.status(400).send({
-            changeModal: { errorMessage: 'Password fields do not match!' }
-        });
-    }
-    // Now authenticate and change password
-    if(model.authenticate(oldPass, req.user.hashedPassword, req.user.salt)) {
-        var salt = model.makeSalt();
-        var hashedPassword = model.encryptPassword(newPass, salt);
-        var queryString = `UPDATE users SET hashedPassword = '${hashedPassword}', salt = '${salt}'  WHERE username = '${req.user.username}'`;
-        db.query(queryString, function(err){
-            if (err && err.code === 'ER_DUP_ENTRY') {
-                return res.status(400).send({ changeModal: { errorMessage: 'That email already exists!' } });
-            } else if (err) {
-                console.log('update error', err)
-                return res.status(400).send({ changeModal: { errorMessage: 'Sign up failed try again!'  } });
-            }
-            res.send('Updated');
-        });
-
-    } else {
-        return res.status(400).send({
-            changeModal: { errorMessage: 'Your old password is invalid!' }
-        });
-    }
+    User.updatePassword({
+        user: user,
+        oldPass: oldPass,
+        newPass: newPass,
+        reNewPass: reNewPass
+    },function(err, data){
+        if(err){
+            return res.status(err.status).send(err.msg);
+        }
+        res.send(data);
+    })
 }
 
 controller.changePasswordForm = function(req, res){
@@ -133,5 +113,62 @@ controller.changePasswordForm = function(req, res){
         })
     });
 }
+
+var mailer = require('./mailer')
+
+
+controller.reset = function(req, res){
+    var user = req.user;
+    var newPass = req.body.newPassword;
+    var reNewPass = req.body.reNewPassword;
+
+    User.changePassword({
+        user: user,
+        newPass: newPass,
+        reNewPass: reNewPass
+    },function(err, data){
+        if(err){
+            res.render('reset', { errorMessage : err.msg });
+        }
+        var token = auth.signToken(req.user.id, req.user.username);
+        res.cookie('bm_token', token, { expires: new Date(Date.now() + 900000), httpOnly: true });
+        res.redirect('/app/');
+    })
+}
+
+controller.forgot = function(req, res){
+    var scriptOn = false; // Prepare isomorphic app
+
+    mailer.sendResetEmail(req)
+    .then(function(data){
+        if(scriptOn == true){
+            return res.json(data)
+        }
+
+        res.render('login', { errorMessage : 'Reset email sent! Check your inbox.' });
+    })
+    .catch(function(err){
+        if(scriptOn == true){
+            return res.status(400).send(err)
+        }
+        res.render('forgot', { errorMessage : '' });
+    })
+}
+
+controller.forgotForm = function(req, res){
+    var email = db.escape(req.query.token);
+    res.render('forgot', { errorMessage : '' });
+}
+
+controller.resetForm = function(req, res){
+    var userId = req.user.user_id;
+
+    // Generate a new token to send reset request
+    var token = auth.signToken(req.user.id, req.user.username);
+    res.cookie('bm_token', token, { expires: new Date(Date.now() + 900000), httpOnly: true });
+
+    res.render('reset', { errorMessage : '' });
+}
+
 
 module.exports = controller;

@@ -17,7 +17,7 @@ gulp.task('webpack', function(){
 gulp.task('start', function () {
     nodemon({
         script: 'server/app.js',
-        ext: 'js html ejs',
+        ext: 'js html ejs css',
         ignore: [
             'client/app',
             'node_module',

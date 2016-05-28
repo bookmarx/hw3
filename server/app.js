@@ -33,4 +33,7 @@ http.createServer(app).listen(config.port, function () {
     logger.info('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
+// var mailer = require('./api_v2/user/mailer.service');
+// mailer.sendResetEmail('alexhgian@gmail.com');
+
 exports = module.exports = app;
