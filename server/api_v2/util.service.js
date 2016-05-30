@@ -101,5 +101,5 @@ function queryP(query){
 }
 
 function starValToCss(val){
-    return (val) ? 'fa-star' : 'fa-star-o';
+    return (val) ? 'in-star-full' : 'in-star-empty';
 }

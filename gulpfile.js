@@ -11,7 +11,7 @@ gulp.task('webpack', function(){
     .pipe(fileCache.filter())
 	.pipe(webpack( require('./webpack.config.js') ))
 	.pipe(fileCache.cache())
-    .pipe(gulp.dest('client/app/'));
+    .pipe(gulp.dest('client/'));
 })
 
 gulp.task('start', function () {
@@ -19,7 +19,7 @@ gulp.task('start', function () {
         script: 'server/app.js',
         ext: 'js html ejs css',
         ignore: [
-            'client/app',
+            'client',
             'node_module',
             'gulpfile.js'
         ],

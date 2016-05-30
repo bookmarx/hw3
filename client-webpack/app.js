@@ -7,7 +7,12 @@ require("./style/skeleton/css/normalize.css");
 require("./style/skeleton/css/skeleton.css");
 require("./style/main.css");
 require("./style/modal.css");
-require("font-awesome-webpack");
+require("./icomoon.font");
+
+
+//require("./style/icon.css");
+//require("font-awesome-webpack!./font-awesome.config.js");
+//require('./style/icons/symbol-defs.svg');
 
 window.bm = {
     'load': loadApp,

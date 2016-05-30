@@ -2,15 +2,15 @@
     <div class="bm-nav-top row">
         <h4 class="bm-title">Bookmarx</h4>
         <div class="right">
-            <a id="bm-add" href="#" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Bookmark" onClick="bm.bookmark.openAddModal(event)"></a>
-            <a id="bm-add-folder" href="#" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal(event)"></a>
+            <a id="bm-add" href="#" class="button in in-plus in-lg" aria-hidden="true" title="Add Bookmark" onClick="bm.bookmark.openAddModal(event)"></a>
+            <a id="bm-add-folder" href="#" class="button in in-folder-plus in-lg" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal(event)"></a>
             <div class="dropdown">
-                <a class="button fa fa-cog fa-2x"></a>
+                <a class="button in in-cog in-lg"></a>
                 <div class="dropdown-content">
-                    <a class="button button-primary"><i class="fa fa-upload"></i>  Import</a>
-                    <a class="button button-primary" href="/v2/bm?download=true"><i class="fa fa-download" download></i> Export</a>
-                    <a class="button button-primary" href="#" class="" onClick="bm.bookmark.openChangeModal(event)"><i class="fa fa-key"></i> Change Password</a>
-                    <a class="button button-primary" href="/logout" class="" title="Logout"><i class="fa fa-sign-out"></i>  Logout</a>
+                    <a class="button button-primary"><i class="in in-upload"></i>  Import</a>
+                    <a class="button button-primary" href="/v2/bm?download=true"><i class="in in-download" download></i> Export</a>
+                    <a class="button button-primary" href="#" class="" onClick="bm.bookmark.openChangeModal(event)"><i class="in in-key"></i> Change Password</a>
+                    <a class="button button-primary" href="/logout" class="" title="Logout"><i class="in in-exit"></i>  Logout</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <div class="bm-nav-bottom row">
         <form id="bm-search-form" action="#" method="GET">
             <input id="bm-search" type="text" name="keyword" onKeyDown="if(event.keyCode==13) bm.bookmark.search(event);" placeholder="Search bookmarks">
-            <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" onClick="bm.bookmark.search(event)"></button>
+            <button id="bm-search-button" type="button" class="button sb-button-submit in in-search in-md" onClick="bm.bookmark.search(event)"></button>
         </form>
         <form action="#" method="GET">
             <select id="bm-sort" name="orderBy">
@@ -27,7 +27,7 @@
                 <% }); %>
 
             </select>
-            <button type="submit" id="bm-filter-button" class="button bm-icon-button fa fa-filter" onClick="bm.bookmark.filter(event)"></button>
+            <button type="submit" id="bm-filter-button" class="button bm-icon-button in in-equalizer in-md" onClick="bm.bookmark.filter(event)"></button>
         </form>
     </div>
 </nav>
