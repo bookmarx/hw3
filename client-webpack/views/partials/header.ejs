@@ -1,7 +1,7 @@
 <nav>
     <div class="bm-nav-top row">
-        <h4 class="bm-title">Bookmarx</h4>
-        <div class="right">
+        <h4 class="bm-title bm-logo">Bookmarx</h4>
+        <div class="right nav-right">
             <a id="bm-add" href="#" class="button fa fa-plus fa-2x" aria-hidden="true" title="Add Bookmark" onClick="bm.bookmark.openAddModal(event)"></a>
             <a id="bm-add-folder" href="#" class="button fa fa-folder fa-2x" aria-hidden="true" title="Add Folder" onClick="bm.folder.openModal(event)"></a>
             <div class="dropdown">
@@ -17,10 +17,10 @@
     </div>
     <div class="bm-nav-bottom row">
         <form id="bm-search-form" action="#" method="GET">
-            <input id="bm-search" type="text" name="keyword" onKeyDown="if(event.keyCode==13) bm.bookmark.search(event);" placeholder="Search bookmarks">
+            <input id="bm-search" type="text" name="keyword" onKeyDown="if(event.keyCode==13) bm.bookmark.search(event);" placeholder="Search">
             <button id="bm-search-button" type="button" class="button sb-button-submit fa fa-search" onClick="bm.bookmark.search(event)"></button>
         </form>
-        <form action="#" method="GET">
+        <form id="bm-list-form" action="#" method="GET">
             <select id="bm-sort" name="orderBy">
                 <% dd.forEach(function(val, key){%>
                     <option value="<%= val.value %>" <%= val.selected %>><%= val.name %></option>

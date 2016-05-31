@@ -21,11 +21,8 @@
     /*display: none;*/
 
     /*min-height:;*/
-    top:0px;
-    bottom: 0px;
-    border-right: grey;
-    border-right-style: solid;
-    border-right-width: 2px;
+    height: 100%;
+    position: absolute;
 }
 /* Content
 ---------------------------------------------------------------*/
@@ -81,7 +78,7 @@
 }
 .bm-nav nav{
     margin: 0;
-    padding: 10px 10px 10px 10px;
+    padding: 15px;
 }
 .bm-nav .right, .bm-content .right{
     float: right;
@@ -105,6 +102,9 @@
     font-size: 26px;
     display: inline;
     color: white;
+    padding: 0;
+    width: 117px;
+    left: 15px;
 }
 .bm-nav-bottom form {
     margin-bottom: 0;
@@ -112,14 +112,28 @@
 
 .bm-nav-bottom, .bm-nav-top, .bm-nav-top form, .bm-nav-bottom form, .bm-nav-top > div  {
     display: flex;
+    height: 40px;
 }
-.bm-nav-bottom, .bm-nav-top{
-    /*flex-flow: row wrap;
-    flex-wrap: nowrap;*/
+
+
+#bm-sort {
+    position: absolute;
+    width: 100%;
 }
-.bm-nav-bottom > form:first-child, .bm-nav-top > h4, #bm-search {
-    flex: 1 100%;
-    padding-right: 8px;
+
+.nav-right {
+    position: absolute;
+    right: 15px;
+}
+
+.bm-nav-bottom {
+    position: relative;
+}
+
+#bm-search-form {
+    position: absolute;
+    left: 0px;
+    width: 45%;
 }
 
 #bm-search {
@@ -127,10 +141,21 @@
     border-right-width: 0px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
+    width: calc(100% - 40px);
 }
-#bm-sort {
-    margin-right: 5px;
+
+#bm-list-form {
+    width: 52%;
+    position: absolute;
+    right: 0;
 }
+
+#bm-filter-button {
+    width: 40px;
+    position: absolute;
+    right: 0px;
+}
+
 /* Footer
 ---------------------------------------------------------------*/
 .bm-footer {
@@ -210,7 +235,7 @@ input[type="button"].button-calm {
     border-top-left-radius: 0;
     /*background: white;*/
     /*border: none;*/
-    margin-left: -8px;
+    width: 40px;
 }
 
 .button.sb-button-submit:hover, .bm-nav-top a.button:hover  {
@@ -230,21 +255,22 @@ input[type="button"].button-calm {
 /* Login
 ---------------------------------------------------------------*/
 .bm-login {
-    padding: 15px;
     background-color: #D32F2F;
     color: white;
+    padding: 0 50px 0 50px;
+    margin: 0;
+    position: relative;
+    top: 20%;
 }
 
 .bm-login > input{
     color: black;
+    width: 100%;
 }
 
 .bm-error-message {
     color: #F44336
 }
-
-
-
 
 .dropdown {
     position: relative;
@@ -267,4 +293,64 @@ input[type="button"].button-calm {
 }
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.bm-title {
+    text-align: center;
+    font-size: 6.5rem;
+}
+
+@media (max-width: 320px) {
+    .bm-title {
+        font-size: 5rem;
+    }
+    .bm-login {
+        padding: 0 15px 0 15px;
+    }
+    .bm-log {
+        font-size: 2.5rem;
+    }
+    .bm-sign {
+        font-size: 2.5rem;
+    }
+    .bm-login {
+        top: 13%;
+    }
+} 
+
+.bm-log {
+    font-size: 3rem;
+}
+
+.bm-sign {
+    font-size: 3rem;
+}
+
+#login-btn, .signup-btn {
+    width: 20%;
+    float: right;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    margin-left: 1%;
+    color: black;
+    border-color: grey;
+}
+
+#login-btn:hover, .signup-btn:hover {
+    background-color: #33C3F0;
+    color: white;
+}
+
+/* Main Page
+---------------------------------------------------------------*/
+
+.bm-logo {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+li .right a {
+    padding: 10px;
 }
