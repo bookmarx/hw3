@@ -223,6 +223,36 @@ Bookmark.star = function(event){
     });
 };
 
+Bookmark.openImportModal = function(){
+    util.load({
+        modals: {
+            importModal: {}
+        }
+    })
+};
+
+Bookmark.import = function(event){
+    event.preventDefault();
+
+    var form = event.target;
+    console.log("####form", form);
+
+    //var file = form['file-import'].files[0];
+    var fileData = new FormData(form);
+    //fileData.append("File1", file, "import.json");
+
+    axios.post('/v2/bm/import', fileData)
+    .then(function (response) {
+        if(response.status == 201 || response.status == 200 ){
+            Bookmark.list();
+        }
+    })
+    .catch(function (response) {
+        util.handleError(response);
+    });
+
+};
+
 Bookmark.openChangeModal = function(){
     util.load({
         modals: {
