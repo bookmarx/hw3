@@ -265,6 +265,7 @@ input[type="button"].button-calm {
 
 .bm-login > input{
     color: black;
+    background-color:white;
     width: 100%;
 }
 
@@ -280,7 +281,8 @@ input[type="button"].button-calm {
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 0;
+    right: 5px;
+    top: 33px;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -300,7 +302,7 @@ input[type="button"].button-calm {
     font-size: 6.5rem;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 321px) {
     .bm-title {
         font-size: 5rem;
     }
@@ -353,4 +355,11 @@ input[type="button"].button-calm {
 
 li .right a {
     padding: 10px;
+}
+
+#bm-folder {
+    position: absolute;
+    top: 50px;
+    background: white;
+    width: 100%;
 }
