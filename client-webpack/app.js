@@ -7,6 +7,7 @@ require("./style/skeleton/css/normalize.css");
 require("./style/skeleton/css/skeleton.css");
 require("./style/main.css");
 require("./style/modal.css");
+require("./style/pagination.css");
 require("./icomoon.font");
 
 

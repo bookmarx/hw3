@@ -1,0 +1,184 @@
+.pagination,
+.pagination li a {
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination li {
+  margin-bottom: 0;
+  background-color: #33c3f0;
+  list-style-type: none;
+}
+
+.pagination a {
+  font-weight: 300;
+  padding-top: 1px;
+  text-decoration:none;
+  /*border: 1px solid rgba(0,0,0,.25);*/
+  border-left-width: 0;
+  min-width:44px;
+  min-height:44px;
+  color: rgba(255,255,255,.85);
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
+}
+
+.pagination li:not([class*="current"]) a:hover {
+  background-color: rgba(255,255,255,.2);
+  border-top-color: rgba(0,0,0,.35);
+  border-bottom-color: rgba(0,0,0,.5);
+}
+
+.pagination li:not([class*="current"]) a:focus,
+.pagination li:not([class*="current"]) a:active {;
+  box-shadow: 0px 0px 10px 1px rgba(0,0,0,.25);
+  border-left-width:1px;
+}
+
+.pagination li:first-of-type a {
+  border-left-width: 1px;
+}
+
+.pagination li:first-of-type span,
+.pagination li:last-of-type span,
+.pagination li:nth-of-type(2) span,
+.pagination li:nth-last-of-type(2) span {
+  /* screen readers only */
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.pagination li:first-child a::before,
+.pagination li:last-child a::after,
+.pagination li:nth-of-type(2) a::before,
+.pagination li:nth-last-of-type(2) a::after {
+  display: inline-block;
+  /*font-family: Fontawesome;*/
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+
+/*.pagination li:first-child a::before,*/
+/*.pagination li:last-child a::after { content: "\f100"; }*/
+
+/*.pagination li:nth-of-type(2) a::before,*/
+/*.pagination li:nth-last-of-type(2) a::after { content: "\f104"; }*/
+
+.pagination li:last-child a::after,
+.pagination li:nth-last-of-type(2) a::after { transform: rotate(180deg); }
+
+.pagination li.current a {
+  padding-top:.25em;
+  color: rgba(255,255,255,1);
+  background-color: rgba(255,255,255,.15);
+  box-shadow: inset 0px 2px 1px 0px rgba(0,0,0,.25);
+  cursor: default;
+  pointer-events: none;
+}
+
+@media only screen and ( max-width: 30.063em ) {
+  .pagination li:first-child,
+  .pagination li:last-child {
+    /* screen readers only */
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .pagination li:nth-of-type(2) a { border-left-width: 1px; }
+
+}
+
+@media only screen and ( max-width: 20.063em ) {
+  .pagination li {
+    /* screen readers only */
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .pagination li.current,
+  .pagination li:first-of-type,
+  .pagination li:last-of-type,
+  .pagination li:nth-of-type(2),
+  .pagination li:nth-last-of-type(2){
+    position: initial;
+    top: initial;
+    left: initial;
+  }
+
+  .pagination li:nth-of-type(2) a { border-left-width: 0; }
+
+}
+
+/*@media only screen and ( max-width: 30.063em ) {*/
+
+  /*h1 { font-size: 1.35em !important; }*/
+
+  /*.pagination li:first-child,*/
+  /*.pagination li:last-child {*/
+    /*!* screen readers only *!*/
+    /*position: absolute;*/
+    /*top: -9999px;*/
+    /*left: -9999px;*/
+  /*}*/
+
+  /*.pagination li:nth-of-type(2) a { border-left-width: 1px; }*/
+
+/*}*/
+
+/*@media only screen and ( max-width: 15.063em ) {  !* For watches? *!*/
+
+  /*.pagination li { width: 50%;}*/
+
+  /*.pagination li.current {*/
+    /*order: 2;*/
+    /*width: 100%;*/
+    /*border-left-width: 1px;*/
+
+  /*}*/
+
+/*}*/
+
+/* Just Setting a few defaults */
+/*
+html {
+  overflow-y: scroll;
+  box-sizing: border-box;
+  font-size: 100%;
+  line-height: 1.4236;
+  font-family: 'Roboto', sans-serif;
+  background-color: lightseagreen;
+  color: #444;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 1.382rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+  box-shadow: 0px .5vh 5px 0px rgba(0,0,0,.25);
+  padding:1em;
+  background-color:#fff;
+  max-width: 53rem;
+  margin: 1em auto;
+  justify-content: center;
+  align-items: center;
+}*/

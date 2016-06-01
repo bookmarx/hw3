@@ -71,3 +71,19 @@
 .close:hover {
     background: #00d9ff;
 }
+
+/* Larger than mobile */
+@media (max-width: 400px) {
+    .modal-dialog > section {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}

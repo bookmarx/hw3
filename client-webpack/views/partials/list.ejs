@@ -34,7 +34,7 @@
     <% bm.forEach(function(val, key){ %>
         <li>
             <a href="<%= val.url %>"> <%= val.title %> </a>
-            <span class="right" data-bm="<%= JSON.stringify(val) %>">
+            <span class="right bm-options" data-bm="<%= JSON.stringify(val) %>">
                 <a href="/v1/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
                     <i class="in <%=val.starCSS %>" aria-hidden="true"></i>
                 </a>

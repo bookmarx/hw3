@@ -32,8 +32,8 @@ module.exports = {
         'beautify': false,
         'htmlmin': true, // or enable here
         'htmlminOptions': {
-            //removeTagWhitespace: true,
-            //conservativeCollapse: true,
+            removeTagWhitespace: true,
+            conservativeCollapse: true,
             //collapseWhitespace: true,
             //collapseInlineTagWhitespace: true,
             removeComments: true
@@ -41,11 +41,11 @@ module.exports = {
         }
     },
     plugins: [
-         new webpack.optimize.UglifyJsPlugin({
-             compress: {
-                 warnings: true
-             }
-         }),
+         //new webpack.optimize.UglifyJsPlugin({
+         //    compress: {
+         //        warnings: true
+         //    }
+         //}),
         new CleanWebpackPlugin(['client'], {
             root: __dirname,
             verbose: true,

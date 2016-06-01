@@ -260,6 +260,19 @@ console.log(user);
     });
 }
 
+Bookmark.searchFocus = function(e, isFocus){
+    var width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    console.log('width', width)
+    if(isFocus){
+        document.getElementById('bm-sort-form').style.display = 'none';
+    } else {
+        document.getElementById('bm-sort-form').style.display = 'flex';
+    }
+
+}
 
 
 module.exports =  Bookmark;
