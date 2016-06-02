@@ -294,4 +294,40 @@ controller.insertForm = function(req, res) {
         });
 };
 
+controller.import = function(req, res) {
+    var uid = db.escape(req.user.id);
+    util.queryP(`DELETE from bookmarks where user_id = ${uid}`)
+    .then(function(){
+        var fdata = JSON.parse(req.file.buffer);
+        console.log('file', fdata.bm);
+        var pArr = [];
+        fdata.bm.forEach(function(val, idx) {
+            var title = db.escape(val.title);
+            var url = db.escape(val.url);
+            var description = db.escape(val.description);
+            var keywords = db.escape(val.keywords);
+            var folder_id = '-1';
+
+            console.log('title', title);
+
+            var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+uid+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
+            pArr.push(util.queryP(queryString));
+        });
+
+        Promise.all(pArr)
+        .then(function(data){
+            console.log('Complete Insert!', data);
+            res.send();
+        })
+        .catch(function(err){
+            console.log('Error Insert: ', err);
+            res.status(500).send(err);
+        })
+    })
+    .catch(function(err){
+        console.log('Error Insert: ', err);
+        res.status(500).send(err);
+    });
+};
+
 module.exports = controller;

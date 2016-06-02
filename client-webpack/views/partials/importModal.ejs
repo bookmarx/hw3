@@ -1,0 +1,21 @@
+<div id="importModal" class="modal-dialog">
+    <section>
+        <form enctype="multipart/form-data" 
+            action="/v2/bm/import"
+            method="POST"
+            onsubmit="bm.bookmark.import(event)">
+            <header class="modal-header dark-primary-color">
+                <h2>Upload the bookmarks file</h2>
+            </header>
+            <div class="modal-body">
+                <input type="file" id="the-import-file-input" name="file-import">
+            </div>
+            <footer class="modal-footer">
+                <!-- <a href="#close" title="Close" class="button">Delete</a> -->
+                <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
+                <a href="/v1/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
+                <button input="submit" class="button button-primary">Upload</button>
+            </footer>
+        </form>
+    </section>
+</div>

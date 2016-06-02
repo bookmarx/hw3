@@ -4,6 +4,8 @@ var express = require('express');
 var controller = require('./bookmark.controller');
 var auth = require('../../auth/auth');
 var util = require('../util.service');
+var multer  = require('multer');
+var upload = multer();
 
 var router = express.Router();
 
@@ -17,8 +19,11 @@ router.post('/', controller.insert);// uid
 router.delete('/:bid(\\d+)', controller.delete);
 router.put('/star/:bid(\\d+)', controller.star);
 
+
 // Exclusive routes for when js is turned off
 // ------------------------------------------------------
+
+router.post('/import', upload.single("file-import"), controller.import);
 
 // Modal/Forms
 router.get('/editForm/:bid(\\d+)', controller.updateForm);
