@@ -1,6 +1,6 @@
 <div id="openAddModal" class="modal-dialog">
     <section>
-        <form action="/v1/bm/delete/<%= modals.deleteModal['bookmark_id'] %>"
+        <form action="/v2/bm/delete/<%= modals.deleteModal['bookmark_id'] %>"
             method="POST"
             onsubmit="bm.bookmark.delete(event, <%= modals.deleteModal['bookmark_id'] %>)">
             <header class="modal-header dark-primary-color">
@@ -12,7 +12,7 @@
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="/v1/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
+                <a href="/v2/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
                 <button input="submit" class="button button-primary">Yes</button>
             </footer>
         </form>

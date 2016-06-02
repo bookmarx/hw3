@@ -1,6 +1,6 @@
 <div id="openAddModal" class="modal-dialog">
     <section>
-        <form action="#" method="POST">
+        <form action="/v2/bm" method="POST">
             <header class="modal-header dark-primary-color">
                 <h2>Add Bookmark</h2>
             </header>
@@ -29,7 +29,7 @@
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="#" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
+                <a href="/v2/bm" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
                 <button input="submit" class="button button-primary"  onClick="bm.bookmark.add(event)">Save</button>
 
             </footer>

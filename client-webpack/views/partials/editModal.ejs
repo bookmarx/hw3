@@ -1,7 +1,7 @@
 <!-- Edit Modal -->
 <div id="openEditModal" class="modal-dialog">
     <section>
-        <form action="/v1/bm/edit/<%= modals.editModal.bm.bookmark_id %>"
+        <form action="/v2/bm/edit/<%= modals.editModal.bm.bookmark_id %>"
             method="POST"
             data-bm-id="<%= modals.editModal.bm.bookmark_id %>"
             onsubmit="bm.bookmark.edit(event)">
@@ -38,7 +38,7 @@
             <footer class="modal-footer">
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
-                <a href="/v1/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
+                <a href="/v2/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
                 <button type="submit" class="button button-primary">Save</button>
 
             </footer>

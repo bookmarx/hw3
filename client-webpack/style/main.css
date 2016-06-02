@@ -330,6 +330,7 @@ input[type="button"].button-calm {
     text-align: left;
     text-transform: none;
     list-style-type: none;
+    margin: 0;
 }
 .dropdown-content li:hover,.dropdown-content li:active, .dropdown-content a:hover {
     background-color: #eee;
@@ -349,4 +350,8 @@ input[type="button"].button-calm {
 .in-lg {
     font-size:32px;
     line-height: 0;
+}
+
+.dropdown-content i.in {
+    line-height: 22px;
 }

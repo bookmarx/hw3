@@ -30,7 +30,7 @@ function renderModalMiddleware(){
         res.renderModal = function(modalOpt){
             this.render('index', {
                 folders: {},
-                dd: filterOptions(),
+                dd: filterOptions().dd,
                 bm: [],
                 modals: getModals(modalOpt)
             });

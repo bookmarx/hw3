@@ -71,7 +71,9 @@ folders.updateFolder = function(event){
 /**
 * Open the Edit Folder Modal - Incomplete
 */
-folders.openModal = function(){
+folders.openModal = function(event){
+    event.preventDefault();
+
     util.load({
         modals: {
             addFolderModal: {

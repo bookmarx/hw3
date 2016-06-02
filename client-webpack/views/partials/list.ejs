@@ -1,7 +1,7 @@
 <ul>
     <% for( var fname in folders ){ %>
         <li class="bm-folder" >
-            <i class="fa fa-folder" aria-hidden="true"></i> <%= fname %>
+            <i class="in in-folder" aria-hidden="true"></i> <%= fname %>
             <span class="right" style="padding-right:15px" onClick="bm.folder.openEditFolderModal()">
               <!--  <a href="#"><i class="fa fa-edit" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
@@ -11,14 +11,14 @@
                     <% if( val.bookmark_id ){ %>
                         <li>
                             <a href="<%= val.url %>"> <%= val.title %> </a>
-                            <span class="right" data-bm="<%= JSON.stringify(val) %>">
-                                <a href="/v1/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
+                            <span class="right bm-options" data-bm="<%= JSON.stringify(val) %>">
+                                <a href="/v2/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
                                     <i class="in <%=val.starCSS %>" aria-hidden="true"></i>
                                 </a>
-                                <a href="/v1/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
+                                <a href="/v2/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
                                     <i class="in in-pencil" aria-hidden="true"></i>
                                 </a>
-                                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
+                                <a href="/v2/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
                                     <i class="in in-bin" aria-hidden="true"></i>
                                 </a>
                             </span>
@@ -35,13 +35,13 @@
         <li>
             <a href="<%= val.url %>"> <%= val.title %> </a>
             <span class="right bm-options" data-bm="<%= JSON.stringify(val) %>">
-                <a href="/v1/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
+                <a href="/v2/bm/star/<%= val.bookmark_id %>" onClick="bm.bookmark.star(event)">
                     <i class="in <%=val.starCSS %>" aria-hidden="true"></i>
                 </a>
-                <a href="/v1/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
+                <a href="/v2/bm/editForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openEditModal(event)">
                     <i class="in in-pencil" aria-hidden="true"></i>
                 </a>
-                <a href="/v1/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
+                <a href="/v2/bm/deleteForm/<%= val.bookmark_id %>" onClick="bm.bookmark.openDeleteModal(event)">
                     <i class="in in-bin" aria-hidden="true"></i>
                 </a>
             </span>

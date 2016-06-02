@@ -24,7 +24,7 @@ module.exports = {
             //{ test: /index\.html/, loader: "file-loader" },
             {
                 test: /\.font\.(js|json)$/,
-                loader: ExtractTextPlugin.extract('style-loader','css-loader!fontgen-loader')
+                loader: ExtractTextPlugin.extract('style-loader','css-loader!fontgen-loader?fileName=[]')
             }
         ]
     },
@@ -46,11 +46,11 @@ module.exports = {
          //        warnings: true
          //    }
          //}),
-        new CleanWebpackPlugin(['client'], {
-            root: __dirname,
-            verbose: true,
-            dry: false
-        }),
+        //new CleanWebpackPlugin(['client'], {
+        //    root: __dirname,
+        //    verbose: true,
+        //    dry: false
+        //}),
         new ExtractTextPlugin("[name].css"),
         new CopyWebpackPlugin([
             {

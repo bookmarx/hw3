@@ -5,7 +5,7 @@ var db = require('../../db')
 exports.where = where;
 exports.getFoldersByUser = findFoldersByUser;
 exports.find = find;
-
+exports.findOne = findOne;
 
 /* Definition
 ---------------------------------------------------------------*/

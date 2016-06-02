@@ -12,6 +12,7 @@ function get(path, param){
         }
     })
     .catch(function (response) {
+        alert(response)
         util.handleError(response);
     });
 }
@@ -20,6 +21,7 @@ function get(path, param){
 * Bookmark
 */
 Bookmark.list = function(event){
+    console.log('bm.list()');
     if(event){
         event.preventDefault();
     }
@@ -57,7 +59,8 @@ Bookmark.filter = function(event){
 /**
 * Bookmark
 */
-Bookmark.openAddModal = function(){
+Bookmark.openAddModal = function(event){
+    event.preventDefault();
     axios.get('/v2/folder')
     .then(function(response){
         util.load({

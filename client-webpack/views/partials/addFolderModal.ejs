@@ -1,7 +1,7 @@
 <!-- Add Folder Modal -->
 <div id="openAddFolderModal" class="modal-dialog">
     <section>
-        <form action="/v1/bm/addFolder/" method="post">
+        <form action="/v2/folder/" method="post">
             <header class="modal-header dark-primary-color">
                 <h2>Add Folder</h2>
             </header>
@@ -20,7 +20,7 @@
                 <!-- <a href="#close" title="Close" class="button">Delete</a> -->
                 <!-- <a href="#close" title="Close" class="button button-danger">Delete</a> -->
 
-                <a title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
+                <a href="/v2/bm/" title="Close" class="button" onClick="bm.bookmark.list(event)">Cancel</a>
                 <button type="submit" class="button button-primary" onClick="bm.folder.saveFolder(event)">Save</button>
             </footer>
         </form>

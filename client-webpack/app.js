@@ -10,7 +10,7 @@ require("./style/modal.css");
 require("./style/pagination.css");
 require("./icomoon.font");
 
-
+axios.defaults.headers.common['x-js-on'] = true;
 //require("./style/icon.css");
 //require("font-awesome-webpack!./font-awesome.config.js");
 //require('./style/icons/symbol-defs.svg');

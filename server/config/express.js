@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
-
+var config = require('./environment');
 var mySession = session({
   secret: 'N0deJS1sAw3some',
   resave: true,
@@ -17,7 +17,7 @@ module.exports = function(app) {
 
     /*  Not overwriting default views directory of 'views' */
     app.set('view engine', 'ejs');
-    app.set('views', app.locals.SERVER_ROOT + '/views');
+    app.set('views', config.root + '/client-webpack/views');
     app.use(compression());
     app.use(express.static('client'));
     app.use(bodyParser.urlencoded({ extended: true }));

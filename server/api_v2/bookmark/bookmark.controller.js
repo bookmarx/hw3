@@ -1,5 +1,5 @@
 /*  TODO: Add Function Blocks*/
-
+'use strict';
 var db = require('../../db');
 var controller = {};
 
@@ -16,10 +16,11 @@ var where = util.where;
 
 
 /**
-*
-* Selects all books and then renders the page with the list.ejs template
-*/
+ *
+ * Selects all books and then renders the page with the list.ejs template
+ */
 controller.list = function(req, res) {
+    var jsOn = (req.headers['x-js-on'] === 'true') ? true : false;
     var orderBy = req.query.orderBy || "";
     var keyword = req.query.keyword;
     var uid = req.user.id;
@@ -57,13 +58,16 @@ controller.list = function(req, res) {
             folders : folders,
             loggedIn: true,
             modals: getModals()
+        };
+
+        if(jsOn){
+            res.json(resData);
+        } else {
+            res.render('index', resData);
         }
 
-        // TODO:  res.render('index', resData);
-        res.json(resData);
     }, function(reason) {
         logger.error('[ bookmark.controller.js - Promise.all() ]', reason);
-        // TODO:  res.render()
         res.status(500).send(reason);
     }).catch(function(err){
         logger.error('[ bookmark.controller.js - Promise.all().catch() ]', err);
@@ -74,6 +78,8 @@ controller.list = function(req, res) {
 
 
 controller.insert = function(req, res){
+    var jsOn = (req.headers['x-js-on']) ? true : false;
+
     var user_id = req.user.id;
     var title = db.escape(req.body.title);
     var url = db.escape(req.body.url);
@@ -90,16 +96,33 @@ controller.insert = function(req, res){
     var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+user_id+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
     db.query(queryString, function(err){
         if(err){
-            return res.status(500).send({
-                addModal: { errorMessage: err }
-            });
+
+            // Javascript On/Off
+            if(jsOn){
+                res.status(500).send({
+                    addModal: { errorMessage: err }
+                });
+            } else {
+                res.renderModal({
+                    addModal: { errorMessage: err }
+                });
+            }
+            return null;
         }
-        res.status(201).send('Created.');
+
+        // Javascript On/Off
+        if(jsOn){
+            res.status(201).send('Created');
+        } else {
+            res.redirect('/v1/bm/');
+        }
     });
 }
 
 
 controller.update = function(req, res){
+    var jsOn = (req.headers['x-js-on']) ? true : false;
+
     var bid = req.params.bid;
     var title = db.escape(req.body.title);
     var url = db.escape(req.body.url);
@@ -108,13 +131,18 @@ controller.update = function(req, res){
     var folder_id = db.escape(req.body.folders);
 
     var queryString = 'UPDATE bookmarks SET title = ' + title +
-    ', url = ' + url +
-    ', description = ' + description+
-    ', keywords = ' + keywords+
-    ', folder_id = ' + folder_id +
-    ' WHERE bookmark_id = ' + bid;
+        ', url = ' + url +
+        ', description = ' + description+
+        ', keywords = ' + keywords+
+        ', folder_id = ' + folder_id +
+        ' WHERE bookmark_id = ' + bid;
     db.queryP(queryString).then(function(data){
-        res.json(data);
+        logger.info(`[ bookmark.controller.js - update() - queryP() ] ${data}`);
+        if(jsOn){
+            res.json(data);
+        } else {
+            res.redirect('/v2/bm/');
+        }
     }).catch(function(err){
         res.status(500).send(err);
     });
@@ -124,34 +152,51 @@ controller.update = function(req, res){
 
 
 /**
-* Deletes the passed in book from the database.
-* Does a redirect to the list page
-*/
+ * Deletes the passed in book from the database.
+ * Does a redirect to the list page
+ */
 controller.delete = function(req, res) {
+    var jsOn = (req.headers['x-js-on']) ? true : false;
     var uid = db.escape(req.user.id);
     var bid = db.escape(req.params.bid);
+
+    logger.info(`[ bookmark.controller.js - delete() ] uid: ${uid} bid: ${uid}`)
+
     db.query(`DELETE from bookmarks where bookmark_id = ${bid} and user_id = ${uid}`, function(err){
         if (err){
             res.status(500).send();
         };
-        res.status(204).send();
+        if(jsOn){
+            res.status(204).send();
+        } else {
+            res.redirect('/v2/bm/');
+        }
     });
 };
 
 
 /**
-* Star a bookmark
-* Redirect to the main page
-*/
+ * Star a bookmark
+ * Redirect to the main page
+ */
 
 controller.star = function(req, res){
+    logger.info('[ bookmark.controller.js - star() ]');
+
+    var jsOn = (req.headers['x-js-on']) ? true : false;
+
     var uid = db.escape(req.user.id);
     var bid  = db.escape(req.params.bid);
     console.log(`star | ${uid} | ${bid}`)
     var queryString = `UPDATE bookmarks SET star = !star WHERE bookmarks.bookmark_id = ${bid} and bookmarks.user_id = ${uid}`;
 
     db.queryP(queryString).then(function(data){
-        res.json(data);
+        if(jsOn){
+            res.json(data);
+        } else {
+            logger.info('[ bookmark.controller.js - star() ] res.redirect(/v2/bm/')
+            res.redirect('/v2/bm/');
+        }
     }).catch(function(err){
         res.status(500).send(err);
     });
@@ -161,9 +206,14 @@ controller.star = function(req, res){
 // Modals/Forms
 //===================================================
 
+// Update Form Modal
 controller.updateForm = function(req, res) {
+    logger.info('[ bookmark.controller.js - updateForm() ]');
+
+    var jsOn = (req.headers['x-js-on']) ? true : false;
+
     var uid = req.user.id;
-    var bid = db.escape(req.params.bookmark_id);
+    var bid = db.escape(req.params.bid);
 
     var folders = [{
         name: 'None',
@@ -171,30 +221,77 @@ controller.updateForm = function(req, res) {
     }];
 
     var f1 = Folder.list({ uid: uid });
-    var f1 = Bookmark.findOne({
+    var f2 = Bookmark.findOne({
         bid: bid,
         uid: uid
     });
 
 
-    Promise.all(function(arr){
+    Promise.all([f1, f2]).then(function(arr){
+        logger.info('[ bookmark.controller.js - updateForm().all() ]', arr);
+
         arr[0].forEach(function(val, key){
             folders.push(val);
         });
-    }).then(function(data){
-        getModals({
-            editModal : {
-                bm: bookmarks[0],
+
+        res.renderModal({
+            editModal: {
+                bm: arr[1][0],
                 folders: folders
             }
-        })
-    })
+        });
+    }, function(err){
+        logger.info('[ bookmark.controller.js - updateForm().all() ]', err);
 
-
-
-
-
+        res.status(500).send(err);
+    }).catch(function(err){
+        logger.info('[ bookmark.controller.js - updateForm().catch() ]', err)
+        res.status(500).send(err);
+    });
 };
 
+// Delete Form Modal
+controller.deleteForm = function(req, res) {
+    logger.info('[ bookmark.controller.js - deleteForm()]')
+
+    var bid = req.params.bid;
+    db.query('SELECT * from bookmarks WHERE bookmark_id =  ' + bid, function(err, bookmarks) {
+        if (err) return res.status(500).send(err);
+        res.renderModal({
+            deleteModal : bookmarks[0]
+        });
+    });
+};
+
+
+/**
+ *
+ * Renders the add page with the add.ejs template
+ */
+controller.insertForm = function(req, res) {
+    var uid = req.user.id;
+    var queryString = `SELECT *
+    FROM folders
+    WHERE folders.user_id = ${uid}`;
+    var folders = [{
+        name: 'None',
+        folder_id: -1
+    }];
+    util.queryP(queryString)
+        .then(function(data){
+            data.forEach(function(val, key){
+                folders.push(val);
+            });
+
+            res.renderModal({
+                addModal : {
+                    folders: folders
+                }
+            });
+        })
+        .catch(function(err){
+            res.redirect('/v2/bm/')
+        });
+};
 
 module.exports = controller;
