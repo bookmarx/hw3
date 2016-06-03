@@ -40,6 +40,9 @@ controller.list = function(req, res) {
     var folders = {};
     var bm2 = Bookmark.getFoldersByUser(keyword, uid);
 
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - list() ] user: ' + uid);
+
     // Wait for Promise 1 & Promise 2
     Promise.all([bm1, bm2]).then(function(val) {
         val[0].forEach(function(val, key){
@@ -93,6 +96,9 @@ controller.insert = function(req, res){
         });
     }
 
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - insert() ] user: ' + uid);
+
     var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+user_id+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
     db.query(queryString, function(err){
         if(err){
@@ -136,6 +142,10 @@ controller.update = function(req, res){
         ', keywords = ' + keywords+
         ', folder_id = ' + folder_id +
         ' WHERE bookmark_id = ' + bid;
+
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - update() ] user: ' + uid);
+
     db.queryP(queryString).then(function(data){
         logger.info(`[ bookmark.controller.js - update() - queryP() ] ${data}`);
         if(jsOn){
@@ -190,6 +200,10 @@ controller.star = function(req, res){
     console.log(`star | ${uid} | ${bid}`)
     var queryString = `UPDATE bookmarks SET star = !star WHERE bookmarks.bookmark_id = ${bid} and bookmarks.user_id = ${uid}`;
 
+
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - star() ] user: ' + uid);
+
     db.queryP(queryString).then(function(data){
         if(jsOn){
             res.json(data);
@@ -208,7 +222,6 @@ controller.star = function(req, res){
 
 // Update Form Modal
 controller.updateForm = function(req, res) {
-    logger.info('[ bookmark.controller.js - updateForm() ]');
 
     var jsOn = (req.headers['x-js-on']) ? true : false;
 
@@ -226,6 +239,8 @@ controller.updateForm = function(req, res) {
         uid: uid
     });
 
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - updateForm() ] user: ' + uid);
 
     Promise.all([f1, f2]).then(function(arr){
         logger.info('[ bookmark.controller.js - updateForm().all() ]', arr);
@@ -277,6 +292,10 @@ controller.insertForm = function(req, res) {
         name: 'None',
         folder_id: -1
     }];
+
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - insertForm() ] user: ' + uid);
+
     util.queryP(queryString)
         .then(function(data){
             data.forEach(function(val, key){
@@ -296,6 +315,12 @@ controller.insertForm = function(req, res) {
 
 controller.import = function(req, res) {
     var uid = db.escape(req.user.id);
+
+
+    // Winston Logging
+    logger.info('[ bookmark.controller.js - insertForm() ] user: ' + uid);
+
+
     util.queryP(`DELETE from bookmarks where user_id = ${uid}`)
     .then(function(){
         var fdata = JSON.parse(req.file.buffer);
