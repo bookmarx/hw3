@@ -1,5 +1,11 @@
 node_modules/
 npm-debug.log
 .gulp-cache
-client/
+client/*.js
+client/*.eot
+client/*.svg
+client/*.ttf
+client/*.woff
+client/*.css
+client/app/
 .idea/

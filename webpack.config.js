@@ -41,11 +41,11 @@ module.exports = {
         }
     },
     plugins: [
-         //new webpack.optimize.UglifyJsPlugin({
-         //    compress: {
-         //        warnings: true
-         //    }
-         //}),
+         new webpack.optimize.UglifyJsPlugin({
+             compress: {
+                 warnings: true
+             }
+         }),
         //new CleanWebpackPlugin(['client'], {
         //    root: __dirname,
         //    verbose: true,
@@ -53,6 +53,10 @@ module.exports = {
         //}),
         new ExtractTextPlugin("[name].css"),
         new CopyWebpackPlugin([
+            {
+                from: __dirname + "/client-webpack/robot.txt",
+                to: __dirname + '/client/robot.txt'
+            },
             {
                 from: __dirname + "/client-webpack/index.html",
                 to: __dirname + '/client/app/index.html'
