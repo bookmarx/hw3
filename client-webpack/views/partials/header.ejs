@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="bm-nav-bottom row">
-        <form id="bm-search-form" action="#" method="GET">
+        <form id="bm-search-form" action="/v2/bm/" method="GET">
             <input id="bm-search"
                    type="text"
                    name="keyword"
@@ -34,9 +34,9 @@
                    onfocus="bm.bookmark.searchFocus(event, 1)"
                    onblur="bm.bookmark.searchFocus(event, 0)"
                    placeholder="Search bookmarks">
-            <button id="bm-search-button" type="button" class="button sb-button-submit in in-search in-md" onClick="bm.bookmark.search(event)"></button>
+            <button id="bm-search-button" type="submit" class="button sb-button-submit in in-search in-md" onClick="bm.bookmark.search(event)"></button>
         </form>
-        <form id="bm-sort-form" action="#" method="GET">
+        <form id="bm-sort-form" action="/v2/bm/" method="GET">
             <select id="bm-sort" name="orderBy">
                 <% dd.forEach(function(val, key){%>
                     <option value="<%= val.value %>" <%= val.selected %>><%= val.name %></option>
