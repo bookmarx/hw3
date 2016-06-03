@@ -25,6 +25,7 @@ Bookmark.list = function(event){
     if(event){
         event.preventDefault();
     }
+    mixpanel.track("List-Button");
     get('/v2/bm');
 }
 
@@ -40,6 +41,7 @@ Bookmark.search = function(event){
             keyword: searchValue
         }
     });
+    mixpanel.track("Search-Button");
 }
 
 /**
@@ -53,6 +55,7 @@ Bookmark.filter = function(event){
             orderBy: sortValue
         }
     });
+    mixpanel.track("Filter-Button");
 }
 
 
@@ -74,6 +77,7 @@ Bookmark.openAddModal = function(event){
     .catch(function(response){
         console.log('Error', response);
     });
+    mixpanel.track("AddModal-Button");
 };
 
 /**
@@ -108,6 +112,7 @@ Bookmark.add = function(event){
     .catch(function (response) {
         console.log('Error', response);
     });
+    mixpanel.track("Add-Button");
 
     event.preventDefault();
 };
@@ -126,6 +131,7 @@ Bookmark.openDeleteModal = function(event){
             deleteModal: bm
         }
     })
+    mixpanel.track("OpenDeleteModal-Button");
 };
 
 /**
@@ -144,6 +150,7 @@ Bookmark.delete = function(event, bookmarkId){
     .catch(function (response) {
         console.log('Error', response);
     });
+    mixpanel.track("Delete-Button");
 };
 
 /**
@@ -168,6 +175,7 @@ Bookmark.openEditModal = function(event){
     .catch(function(response){
         console.log('Error', response);
     });
+    mixpanel.track("OpenEditModal-Button");
 };
 
 /**
@@ -202,6 +210,7 @@ Bookmark.edit = function(event){
     .catch(function (response) {
         util.handleError(response);
     });
+    mixpanel.track("Edit-Button");
 };
 
 /**
@@ -221,6 +230,7 @@ Bookmark.star = function(event){
     .catch(function (response) {
         util.handleError(response);
     });
+    mixpanel.track("Star-Button");
 };
 
 Bookmark.openImportModal = function(){
@@ -259,6 +269,7 @@ Bookmark.openChangeModal = function(){
             changeModal: {}
         }
     })
+    mixpanel.track("OpenChangeModal-Button");
 }
 
 Bookmark.change = function(){
@@ -291,6 +302,7 @@ console.log(user);
             handleError(response);
         }
     });
+    mixpanel.track("ChangePassword-Button");
 }
 
 Bookmark.searchFocus = function(e, isFocus){

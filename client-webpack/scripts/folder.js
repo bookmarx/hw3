@@ -17,6 +17,7 @@ folders.closeModal = function(){
     .catch(function (response) {
         console.log('Error', response);
     });
+    mixpanel.track("CloseModalFolder-Button");
 }
 
 folders.saveFolder = function(event){
@@ -45,6 +46,7 @@ folders.saveFolder = function(event){
             }
         })
     })
+    mixpanel.track("SaveFolder-Button");
 }
 
 /**
@@ -67,6 +69,7 @@ folders.updateFolder = function(event){
     .catch(function(response) {
       console.log('Error', response);
     })
+    mixpanel.track("UpdateFolder-Button");
 }
 /**
 * Open the Edit Folder Modal - Incomplete
@@ -83,6 +86,7 @@ folders.openModal = function(event){
             }
         }
     })
+    mixpanel.track("OpenModal-Button");
 }
 /**
 * Update the Edit Folder Modal - Incomplete
@@ -98,6 +102,7 @@ folders.openEditFolderModal = function(){
           }
       }
   })
+  mixpanel.track("OpenEditFolderModal-Button");
 }
 
 module.exports = folders;
