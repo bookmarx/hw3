@@ -4,11 +4,11 @@
 
 ### Phase
 
-Phase 1 branch: master-phase-1
+Phase 1 branch: master-phase-1 (https://cse136-team4-p1.herokuapp.com/)
 
-Phase 2 branch: master-phase-2
+Phase 2 branch: master-phase-2 (https://cse136-team4-p2.herokuapp.com/)
 
-Phase 3 branch: master/master-phase-3
+Phase 3 branch: master-phase-3 (https://cse136-team4-p3.herokuapp.com/)
 
 ###Module Building
 
