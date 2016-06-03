@@ -51,17 +51,17 @@ Using webpack: https://webpack.github.io/
 
 ### Notable Features
 
-1) Strong password security hashedPassword w/ random salt
-1) Token using JSON Web Tokens to validate api calls and securely transport some non-vital user data.
-1) Forget password with One Time Token Password reset send via NodeMailer
-1) Webpack minification, optimization, custom font building reduced size from 130kb uncompressed down to < 20kb compressed
-1) Webpack compiles node like module in `client-webpack` loading system for scalablity and easy maintainability
-1) Good project structure, single view folder shared between client-webpack and server
-1) CodeShip Continuous Integration and Deployment (heroku) with 1 unit tests
+1. Strong password security hashedPassword w/ random salt
+1. Token using JSON Web Tokens to validate api calls and securely transport some non-vital user data.
+1. Forget password with One Time Token Password reset send via NodeMailer
+1. Webpack minification, optimization, custom font building reduced size from 130kb uncompressed down to < 20kb compressed
+1. Webpack compiles node like module in `client-webpack` loading system for scalablity and easy maintainability
+1. Good project structure, single view folder shared between client-webpack and server
+1. CodeShip Continuous Integration and Deployment (heroku) with 1 unit tests
 
 ### Things that didn't make it into the build
 
-1) Linter
-1) Pagination is done, but not enough time to tests and merge
-1) Service Workers
-1) Note enough time to tests for all error cases
+1. Linter
+1. Pagination is done, but not enough time to tests and merge
+1. Service Workers
+1. Note enough time to tests for all error cases
