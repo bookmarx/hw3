@@ -86,7 +86,9 @@ Using webpack: https://webpack.github.io/
    * Create an account        
    * Login                             
    * Logout                          
-   * Forget/Change a password       
+   * Forget/Change a password
+      * Sessions w/ JSON Web Token
+      * Hash passwords w/ random salt
 * Israel
    * Add a Bookmark           
    * Analytics
