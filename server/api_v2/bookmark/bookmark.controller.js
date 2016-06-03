@@ -83,7 +83,7 @@ controller.list = function(req, res) {
 controller.insert = function(req, res){
     var jsOn = (req.headers['x-js-on']) ? true : false;
 
-    var user_id = req.user.id;
+    var uid = req.user.id;
     var title = db.escape(req.body.title);
     var url = db.escape(req.body.url);
     var description = db.escape(req.body.description);
@@ -99,7 +99,7 @@ controller.insert = function(req, res){
     // Winston Logging
     logger.info('[ bookmark.controller.js - insert() ] user: ' + uid);
 
-    var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+user_id+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
+    var queryString = 'INSERT INTO bookmarks (user_id, title, url, description, keywords, folder_id) VALUES ('+uid+ ', ' + title + ', ' + url+ ', ' + description + ', ' + keywords + ', ' + folder_id +')';
     db.query(queryString, function(err){
         if(err){
 
@@ -135,6 +135,7 @@ controller.update = function(req, res){
     var description = db.escape(req.body.description);
     var keywords = db.escape(req.body.keywords);
     var folder_id = db.escape(req.body.folders);
+    var uid = db.escape(req.user.id);
 
     var queryString = 'UPDATE bookmarks SET title = ' + title +
         ', url = ' + url +
@@ -170,7 +171,7 @@ controller.delete = function(req, res) {
     var uid = db.escape(req.user.id);
     var bid = db.escape(req.params.bid);
 
-    logger.info(`[ bookmark.controller.js - delete() ] uid: ${uid} bid: ${uid}`)
+    logger.info(`[ bookmark.controller.js - delete() ] uid: ${uid} bid: ${uid}`);
 
     db.query(`DELETE from bookmarks where bookmark_id = ${bid} and user_id = ${uid}`, function(err){
         if (err){
@@ -197,7 +198,7 @@ controller.star = function(req, res){
 
     var uid = db.escape(req.user.id);
     var bid  = db.escape(req.params.bid);
-    console.log(`star | ${uid} | ${bid}`)
+    console.log(`star | ${uid} | ${bid}`);
     var queryString = `UPDATE bookmarks SET star = !star WHERE bookmarks.bookmark_id = ${bid} and bookmarks.user_id = ${uid}`;
 
 
@@ -208,7 +209,7 @@ controller.star = function(req, res){
         if(jsOn){
             res.json(data);
         } else {
-            logger.info('[ bookmark.controller.js - star() ] res.redirect(/v2/bm/')
+            logger.info('[ bookmark.controller.js - star() ] res.redirect(/v2/bm/');
             res.redirect('/v2/bm/');
         }
     }).catch(function(err){
@@ -314,6 +315,7 @@ controller.insertForm = function(req, res) {
 };
 
 controller.import = function(req, res) {
+    var jsOn = (req.headers['x-js-on']) ? true : false;
     var uid = db.escape(req.user.id);
 
 
@@ -342,17 +344,30 @@ controller.import = function(req, res) {
         Promise.all(pArr)
         .then(function(data){
             console.log('Complete Insert!', data);
-            res.send();
+            if(jsOn){
+               return res.send();
+            }
+            res.redirect('/v2/bm');
         })
         .catch(function(err){
             console.log('Error Insert: ', err);
-            res.status(500).send(err);
+            if(jsOn){
+                return res.status(500).send(err);
+            }
+            res.redirect('/v2/bm');
         })
     })
     .catch(function(err){
         console.log('Error Insert: ', err);
-        res.status(500).send(err);
+        if(jsOn) {
+            res.status(500).send(err);
+        }
+        res.redirect('/v2/bm');
     });
 };
-
+controller.importModal = function(req, res) {
+    res.renderModal({
+        importModal: {}
+    })
+}
 module.exports = controller;

@@ -29,6 +29,7 @@ router.post('/import', upload.single("file-import"), controller.import);
 router.get('/editForm/:bid(\\d+)', controller.updateForm);
 router.get('/deleteForm/:bid(\\d+)', controller.deleteForm);
 router.get('/addForm', controller.insertForm);// uid
+router.get('/importModal', controller.importModal);// uid
 
 // non-rest routes
 router.get('/star/:bid(\\d+)', controller.star);

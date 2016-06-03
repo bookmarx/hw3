@@ -83,6 +83,8 @@ controller.logout = function(req, res){
 }
 
 controller.changePassword = function(req, res){
+    var jsOn = (req.headers['x-js-on']) ? true : false;
+
     var user = req.user;
     var oldPass = req.body.oldPassword;
     var newPass = req.body.newPassword;
@@ -97,21 +99,22 @@ controller.changePassword = function(req, res){
         if(err){
             return res.status(err.status).send(err.msg);
         }
-        res.send(data);
+
+        if(jsOn){
+            res.send(data);
+        } else {
+            res.redirect('/v2/bm/')
+        }
+
     })
 }
 
 controller.changePasswordForm = function(req, res){
-    res.render('index', {
-        folders: {},
-        dd: filterOptions(),
-        bm: [],
-        modals: getModals({
-            changeModal: {
-                errorMessage: ''
-            }
-        })
-    });
+   res.renderModal({
+       changeModal: {
+           errorMessage: ''
+       }
+   })
 }
 
 var mailer = require('./mailer')
