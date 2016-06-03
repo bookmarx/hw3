@@ -70,3 +70,41 @@ Using webpack: https://webpack.github.io/
 1. Pagination is done, but not enough time to tests and merge
 1. Service Workers, we didn't have time to implement this.
 1. Note enough time to tests for all error cases
+
+
+## Contributions
+
+###Feature List
+* Alex
+   * CSS/HTML
+   * Project Structure
+   * API Design
+   * Building w/ Webpack
+      * Compression
+      * Packaging/Bundling
+      * Minification
+   * Create an account        
+   * Login                             
+   * Logout                          
+   * Forget/Change a password       
+* Israel
+   * Add a Bookmark           
+   * Analytics
+   * Server-side logger
+* Zahara
+   * Edit a Bookmark          
+   * Pagination                    
+* Edward
+   * Delete a Bookmark  
+   * Star/Unstar a bookmark 
+   * CSS/Mobile     
+* Joseph
+   * List your Bookmarks             - 
+   * Sort your Bookmarks  
+   * Search your Bookmarks
+   * Visit a Bookmark           
+* Kay
+   * Categorize your bookmarks (Folder and/or Tag Style)
+      * Add folder
+      * Edit folder
+   * Import/Export list of bookmarks
