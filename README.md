@@ -75,7 +75,7 @@ Using webpack: https://webpack.github.io/
 ## Contributions
 
 ###Feature List
-* Alex
+* Alex Gian (@alex_gian)
    * CSS/HTML
    * Project Structure
    * API Design
@@ -89,23 +89,23 @@ Using webpack: https://webpack.github.io/
    * Forget/Change a password
       * Sessions w/ JSON Web Token
       * Hash passwords w/ random salt
-* Israel
+* Israel Cruz (@israelcruz)
    * Add a Bookmark           
    * Analytics
    * Server-side logger
-* Zahara
+* Zahara Jivani (@zjivani)
    * Edit a Bookmark          
    * Pagination                    
-* Edward
+* Edward Lau (@eklau)
    * Delete a Bookmark  
    * Star/Unstar a bookmark 
    * CSS/Mobile     
-* Joseph
+* Joseph (@janz)
    * List your Bookmarks             - 
    * Sort your Bookmarks  
    * Search your Bookmarks
    * Visit a Bookmark           
-* Kay
+* Kay Yang (@layti)
    * Categorize your bookmarks (Folder and/or Tag Style)
       * Add folder
       * Edit folder
