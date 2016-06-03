@@ -109,4 +109,5 @@ Using webpack: https://webpack.github.io/
    * Categorize your bookmarks (Folder and/or Tag Style)
       * Add folder
       * Edit folder
-   * Import/Export list of bookmarks
+   * Import
+   * Export list of bookmarks
