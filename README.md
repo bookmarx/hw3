@@ -90,24 +90,26 @@ Using webpack: https://webpack.github.io/
       * Sessions w/ JSON Web Token
       * Hash passwords w/ random salt
 * Israel Cruz (@israelcruz)
-   * Add a Bookmark           
+   * Add a Bookmark (client-side)     
    * Analytics
    * Server-side logger
 * Zahara Jivani (@zjivani)
-   * Edit a Bookmark          
-   * Pagination                    
+   * Add a Bookmark (server-side)
+   * Edit a Bookmark (server-side/client-side)    
+   * Pagination
 * Edward Lau (@eklau)
-   * Delete a Bookmark  
+   * Delete a Bookmark 
    * Star/Unstar a bookmark 
-   * CSS/Mobile     
+   * CSS/Mobile  
+   * 404 Page 
 * Joseph (@janz)
    * List your Bookmarks             - 
    * Sort your Bookmarks  
    * Search your Bookmarks
-   * Visit a Bookmark           
+   * Visit a Bookmark  
 * Kay Yang (@layti)
    * Categorize your bookmarks (Folder and/or Tag Style)
       * Add folder
       * Edit folder
-   * Import
+   * Import list of bookmarks
    * Export list of bookmarks
