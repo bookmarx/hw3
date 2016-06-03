@@ -4,8 +4,8 @@ var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var auth = require('../auth');
-var userModel = require('../../api_v1/user/user.model')
-
+var userModel = require('../../api_v2/user/user.model');
+console.log(userModel)
 var router = express.Router();
 
 router.post('/', function(req, res, next) {
