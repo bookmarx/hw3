@@ -77,7 +77,7 @@ Using webpack: https://webpack.github.io/
 ###Feature List
 * Alex Gian (@alex_gian)
    * CSS/HTML
-   * Project Structure
+   * Setup/Project Structure
    * API Design
    * Building w/ Webpack
       * Compression
@@ -107,6 +107,7 @@ Using webpack: https://webpack.github.io/
    * Sort your Bookmarks  
    * Search your Bookmarks
    * Visit a Bookmark  
+   * Database Schema
 * Kay Yang (@layti)
    * Categorize your bookmarks (Folder and/or Tag Style)
       * Add folder
