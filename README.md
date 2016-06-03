@@ -78,7 +78,7 @@ Using webpack: https://webpack.github.io/
 * Alex Gian (@alex_gian)
    * CSS/HTML
    * Setup/Project Structure
-   * API Design
+   * API Design (https://slack-files.com/T0W3ECZA6-F1ABE442K-cef31d9ebb)
    * Building w/ Webpack
       * Compression
       * Packaging/Bundling
